@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Marko\\Desktop\\MongoDB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {}
+    "C:\\Users\\Marko\\Desktop\\New folder (2)\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Marko\\Desktop\\MongoDB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {
+    "C:\\Users\\Marko\\Desktop\\New folder (2)\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\MongoDB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
+        "projectUniqueName": "C:\\Users\\Marko\\Desktop\\New folder (2)\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
         "projectName": "PROJEKAT_MONGODB",
-        "projectPath": "C:\\Users\\Marko\\Desktop\\MongoDB\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
+        "projectPath": "C:\\Users\\Marko\\Desktop\\New folder (2)\\PROJEKAT_MONGODB\\PROJEKAT_MONGODB.csproj",
         "packagesPath": "C:\\Users\\Marko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Marko\\Desktop\\MongoDB\\PROJEKAT_MONGODB\\obj\\",
+        "outputPath": "C:\\Users\\Marko\\Desktop\\New folder (2)\\PROJEKAT_MONGODB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
