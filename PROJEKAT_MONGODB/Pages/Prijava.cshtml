@@ -1,0 +1,37 @@
+﻿@page
+@model PROJEKAT_MONGODB.Pages.PrijavaModel
+@{
+}
+<section class="w3l-login">
+    <div class="login-bg section-gap">
+        <div class="container">
+            <!---728x90--->
+
+
+            <div class="login-form">
+                <h4 class="form-head">Prijava</h4>
+                <form method="post">
+                    <div class="">
+                        <p class="text-head">Email</p>
+                        <input type="text" required="" asp-for="Email" placeholder="Unesite email adresu..." class="input" />
+                    </div>
+                    <div class="">
+                        <p class="text-head">Sifra</p>
+                        <input type="password" required="" asp-for="Sifra" placeholder="Unesite sifru..." class="input" />
+
+                    </div>
+                    <span class="error">@Model.ErrorMessage</span>
+                    
+                    <div class="d-grid align-login-register">
+                        <button type="submit" class="btn btn-theme1" asp-page-handler="Prijava">Prijavi se</button>
+                        @*<a asp-page="/Register" class="signuplink">Nemate nalog? Kreirajte nalog</a>*@
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!---728x90--->
+
+    </div>
+
+</section>

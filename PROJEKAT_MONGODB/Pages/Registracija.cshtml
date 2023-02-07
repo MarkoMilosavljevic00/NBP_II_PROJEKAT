@@ -1,0 +1,66 @@
+﻿@page
+@model PROJEKAT_MONGODB.Pages.RegistracijaModel
+@{
+}
+<section class="w3l-login">
+    <div class="login-bg section-gap">
+        <div class="container">
+            <!---728x90--->
+
+            <div class="logo text-left top-bottom-gap">
+                <a class="brand-logo" href="index-2.html">Haven</a>
+
+                <!-- if logo is image enable this
+                    <a class="brand-logo" href="#index.html">
+                      <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
+                    </a> -->
+            </div>
+            <div class="login-form">
+                <h4 class="form-head">Registracija</h4>
+                <form method="post" id="signupform">
+                    <div class="">
+                        <p class="text-head">Ime: </p>
+                        <input type="text" required="" asp-for="NoviKorisnik.Ime" class="input" placeholder="Unesite ime..." />
+                    </div>
+                    <div class="">
+                        <p class="text-head">Prezime: </p>
+                        <input type="text" required="" asp-for="NoviKorisnik.Prezime" class="input" placeholder="Unesite prezime..." />
+                    </div>
+                    <div class="">
+                        <p class="text-head">Grad: </p>
+                        <input type="text" required="" asp-for="NoviKorisnik.Grad" class="input" placeholder="Unesite grad..." />
+                    </div>
+                    <div class="">
+                        <p class="text-head">Adresa: </p>
+                        <input type="text" required="" asp-for="NoviKorisnik.Adresa" class="input" placeholder="Unesite adresu..." />
+                    </div>
+                    <div class="">
+                        <p class="text-head">Broj telefona: </p>
+                        <input type="text" required="" asp-for="NoviKorisnik.BrojTelefona" class="input" placeholder="Unesite broj telefona..." />
+                    </div>
+                    <div class="">
+                        <p class="text-head">Email adresa: </p>
+                        <input type="email" required="" id="email" asp-for="NoviKorisnik.Email" class="input" style="margin-bottom: 0px" placeholder="Unesite email adresu..." />
+                        <label class="error error-hidden" style="visibility: hidden;">Email adresa nije validna!</label>
+                        <label class="error" style="margin-bottom: 0px">@Model.ErrorMessage</label>
+                    </div>
+                    <div class="">
+                        <p class="text-head" style="margin-top: 0px">Sifra: </p>
+                        <input type="password" required="" id="password" asp-for="NoviKorisnik.Sifra" class="input" style="margin-bottom: 0px" placeholder="Unesite sifru..." />
+                        <label class="error" style="visibility: hidden;">Ovo polje je obavezno!</label>
+                    </div>
+                    <div class="">
+                        <p class="text-head">Ponovite sifru: </p>
+                        <input type="password" required="" id="confirm_password" class="input" style="margin-bottom: 0px" placeholder="Ponovo unesite sifru..." />
+                        <label class="error" style="visibility: hidden;">Ovo polje je obavezno!</label>
+                    </div>
+                    <div class="d-grid align-login-register">
+                        <button type="submit" class="btn btn-theme1" asp-page-handler="Registracija">Registracija</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!---728x90--->
+
+    </div>
+</section>
