@@ -26,16 +26,16 @@
                     <div class="column contentwithphoto-img" style="width:75%;">
                         <div class="galleryContainer">
                             <div class="gallery">
-                                <input type="radio" name="controls" id="c1" checked><img class="galleryImage" id="i1" src="@Model.kruzer.GlavnaSlika" class="img-responsive" alt="">
-                                <input type="radio" name="controls" id="c2"><img class="galleryImage" id="i2" src="@Model.kruzer.Slika1" class="img-responsive" alt="">
-                                <input type="radio" name="controls" id="c3"><img class="galleryImage" id="i3" src="@Model.kruzer.Slika2" class="img-responsive" alt="">
-                                <input type="radio" name="controls" id="c4"><img class="galleryImage" id="i4" src="@Model.kruzer.Slika3" class="img-responsive" alt="">
+                                <input type="radio" name="controls" id="c1" checked><img class="galleryImage" id="i1" src="@Model.kruzer.Slike[0]" class="img-responsive" alt="">
+                                <input type="radio" name="controls" id="c2"><img class="galleryImage" id="i2" src="@Model.kruzer.Slike[1]" class="img-responsive" alt="">
+                                <input type="radio" name="controls" id="c3"><img class="galleryImage" id="i3" src="@Model.kruzer.Slike[2]" class="img-responsive" alt="">
+                                <input type="radio" name="controls" id="c4"><img class="galleryImage" id="i4" src="@Model.kruzer.Slike[3]" class="img-responsive" alt="">
                             </div>
                             <div class="thumbnails">
-                                <label class="thumbnailImage" for="c1"><img src="@Model.kruzer.GlavnaSlika" class="img-responsive" alt=""></label>
-                                <label class="thumbnailImage" for="c2"><img src="@Model.kruzer.Slika1" class="img-responsive" alt=""></label>
-                                <label class="thumbnailImage" for="c3"><img src="@Model.kruzer.Slika2" class="img-responsive" alt=""></label>
-                                <label class="thumbnailImage" for="c4"><img src="@Model.kruzer.Slika3" class="img-responsive" alt=""></label>
+                                <label class="thumbnailImage" for="c1"><img src="@Model.kruzer.Slike[0]" class="img-responsive" alt=""></label>
+                                <label class="thumbnailImage" for="c2"><img src="@Model.kruzer.Slike[1]" class="img-responsive" alt=""></label>
+                                <label class="thumbnailImage" for="c3"><img src="@Model.kruzer.Slike[1]" class="img-responsive" alt=""></label>
+                                <label class="thumbnailImage" for="c4"><img src="@Model.kruzer.Slike[1]" class="img-responsive" alt=""></label>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                 <ul class="mt-4">
                                     <li><span class="title-text">Number Of Rooms : </span> <span class="feature-count">@Model.kabine.Count</span></li>
                                     <li><span class="title-text">Free Internet : </span> <span class="feature-count">Yes</span></li>
-                                    <li><span class="title-text">Phone-Number : </span> <span class="feature-count">@Model.kruzer.KontaktTelefon</span></li>
+                                    <li><span class="title-text">Phone-Number : </span> <span class="feature-count">@Model.kruzer.BrojTelefona</span></li>
                                     @*<li><span class="title-text">Address : </span> <span class="feature-count">@Model.kruzer.A</span></li>*@
                                 </ul>
                             </div>

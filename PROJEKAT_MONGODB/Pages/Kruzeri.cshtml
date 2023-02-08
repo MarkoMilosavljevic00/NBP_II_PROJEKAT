@@ -31,7 +31,7 @@
 
                             <div class="column one-blog">
                                 <div class="box13">
-                                    <a asp-page="/Hotel-Single" asp-route-id="@h.Id"><img class="side-img" src="@h.GlavnaSlika" style="max-height:310px;" alt="" /></a>
+                                    <a asp-page="/Hotel-Single" asp-route-id="@h.Id"><img class="side-img" src="@h.Slike[0]" style="max-height:310px;" alt="" /></a>
                                 </div>
                             </div>
 
@@ -48,7 +48,7 @@
                                     </div>
                                     <ul class="admin-list" style="display:flex; flex-direction:column;">
                                         <li><span class="fa fa-long-arrow-right" aria-hidden="true"></span> WiFi</li>
-                                        <li><span class="fa fa-long-arrow-right" aria-hidden="true"></span> Phone: @h.KontaktTelefon</li>
+                                        <li><span class="fa fa-long-arrow-right" aria-hidden="true"></span> Phone: @h.BrojTelefona</li>
                                     </ul>
                                     <div class="button" style="margin-top:40px;"><a asp-page="/Hotel-Single" asp-route-id="@h.Id" class="btn btn-theme4 mt-3">Details </a></div>
                                 </div>

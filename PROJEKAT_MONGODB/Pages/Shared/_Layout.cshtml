@@ -214,7 +214,7 @@ full_image_server_id,full_image from template_down_details where starter_demo_ur
                             <a class="nav-link" asp-page="/ONama">O Nama</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Kontakt">Kontakt</a>
+                            <a class="nav-link" onclick="scrollDown()">Kontakt</a>
                         </li>
                         @if (Model.Message != null)
                         {
@@ -256,9 +256,9 @@ full_image_server_id,full_image from template_down_details where starter_demo_ur
     <section class="w3l-footer-29-main">
         <div class="footer-29">
             <div class="container">
-                <div class="d-grid grid-col-4 footer-top-29">
-                    <div class="footer-list-29 footer-1">
-                        <h6 class="footer-title-29">Kontaktirajte nas</h6>
+                <div class="d-grid footer-top-29">
+                    <div class="footer-list-29 footer-4">
+                        <h6 class="footer-title-29">Kontakt:</h6>
                         <ul>
                             <li><p><span class="fa fa-map-marker"></span> Aleksandra Medvedeva 14, Nis, Serbia</p></li>
                             <li><a href="tel:+381 65 123 456"><span class="fa fa-phone"></span> +381 65 123 456</a></li>
@@ -273,7 +273,7 @@ full_image_server_id,full_image from template_down_details where starter_demo_ur
                         </div>
                     </div>
 
-                    <div class="footer-list-29 footer-4">
+                    @*<div class="footer-list-29 footer-4">
                         <ul>
                             <h6 class="footer-title-29">Quick Links</h6>
                             <li><a asp-page="/Index">Pocetna</a></li>
@@ -281,15 +281,15 @@ full_image_server_id,full_image from template_down_details where starter_demo_ur
                             <li><a asp-page="/Destinacije">Destinacije</a></li>
                             <li><a asp-page="/Kontakt">Kontakt</a></li>
                         </ul>
-                    </div>
+                    </div>*@
                 </div>
-                <div class="d-grid grid-col-2 bottom-copies">
+                @*<div class="d-grid grid-col-2 bottom-copies">
                     <p class="copy-footer-29">© 2023 SEVENSEAS. All rights reserved</p>
-                </div>
+                </div>*@
             </div>
         </div>
         <!-- move top -->
-        <!--<button onclick="topFunction()" id="movetop" title="Go to top">
+        @*<button onclick="topFunction()" id="movetop" title="Go to top">
             <span class="fa fa-angle-up"></span>
         </button>
         <script>
@@ -311,7 +311,13 @@ full_image_server_id,full_image from template_down_details where starter_demo_ur
                 document.body.scrollTop = 0;
                 document.documentElement.scrollTop = 0;
             }
-        </script>-->
+        </script>*@
+    <script>
+        function scrollDown() {
+            document.body.scrollTop = document.body.scrollHeight;
+            document.documentElement.scrollTop = document.documentElement.scrollHeight;
+        }
+    </script>
         <!-- /move top -->
     </section>
     <script src="js/jquery-3.3.1.min.js"></script>

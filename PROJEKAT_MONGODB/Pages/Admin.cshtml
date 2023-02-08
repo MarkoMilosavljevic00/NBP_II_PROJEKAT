@@ -50,7 +50,7 @@
                                                 <td>@Model.rezervacije.ElementAt(i).BrojTelefonaKorisnika</td>
                                                 <td>@Model.rezervacije.ElementAt(i).DatumKreiranja.ToString("dd.MM.yyyy.")</td>
                                                 <td><a asp-page="/KruzerSingle" asp-route-id="@Model.kruzeriRezervacija.ElementAt(i).Id">@Model.kruzeriRezervacija.ElementAt(i).Naziv</a></td>
-                                                <td>@Model.kruzeriRezervacija.ElementAt(i).KontaktTelefon</td>
+                                                <td>@Model.kruzeriRezervacija.ElementAt(i).BrojTelefona</td>
                                                 <td>@Model.menadzeriRezervacija.ElementAt(i).Ime @Model.menadzeriRezervacija.ElementAt(i).Prezime</td>
                                                 <td>@Model.menadzeriRezervacija.ElementAt(i).Email</td>
                                                 <td>@Model.menadzeriRezervacija.ElementAt(i).BrojTelefona</td>
@@ -103,9 +103,9 @@
                                             continue;
                                         }
                                         <tr>
-                                            <td><a asp-page="/KruzerSingle" asp-route-id="@Model.kruzeri.ElementAt(i).Id"><img src="@Model.kruzeri.ElementAt(i).GlavnaSlika" style="width:150px; height:90px;"></a></td>
+                                            <td><a asp-page="/KruzerSingle" asp-route-id="@Model.kruzeri.ElementAt(i).Id"><img src="@Model.kruzeri.ElementAt(i).Slike[0]" style="width:150px; height:90px;"></a></td>
                                             <td><a asp-page="/KruzerSingle" asp-route-id="@Model.ponudeRezervacija.ElementAt(i).Id">@Model.kruzeri.ElementAt(i).Naziv</a></td>
-                                            <td>@Model.kruzeriRezervacija.ElementAt(i).KontaktTelefon</td>
+                                            <td>@Model.kruzeriRezervacija.ElementAt(i).BrojTelefona</td>
                                             
                                             <td>@Model.menadzeri.ElementAt(i).Ime @Model.menadzeri.ElementAt(i).Prezime</td>
                                             <td>@Model.menadzeri.ElementAt(i).Email</td>

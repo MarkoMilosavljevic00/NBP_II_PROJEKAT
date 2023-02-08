@@ -1,0 +1,316 @@
+﻿@page
+@model PROJEKAT_MONGODB.Pages.DodavanjeKruzera
+@{
+}
+
+<div class="main">
+    <div class="container">
+        <div class="register">
+            <div style="width:100%;display: flex;flex-direction:row;justify-content:space-between;">
+            <h4 class="form-head">Informacije o kruzeru</h4>
+
+            </div><br><br>
+                      <form id="signupForm" method="post" enctype="multipart/form-data">
+
+                          <div class="bi-name-type h-container">
+                              <span class="bi-name v-container wow fadeInLeft">
+                                  <div class="form-element-label">Naziv kruzera/kompanije: </div>
+                                  <input type="text" id="name-val" required="" value="" asp-for="noviKruzer.Naziv">
+                                  @*<label class="error" style="visibility: hidden;">This field is required.</label>*@
+                              </span>
+                          </div>
+                          <div>
+                              <span class="bi-city wow fadeInRight">
+                                  <div class="form-element-label">Kapetan: </div>
+                                  @*<input type="text" id="city-val" value="" asp-for="cities">*@
+                                  <input type="text" id="captain-val" required="" value="" asp-for="noviKruzer.Kapetan">
+                                  <label class="error" style="visibility: hidden;">This field is required.</label>
+                              </span>
+                              <span class="bi-city wow fadeInRight">
+                                  <div class="form-element-label">Broj telefona: </div>
+                                  <input type="text" id="tel-val" value="" required="" asp-for="noviKruzer.BrojTelefona">
+                                  <label class="error" style="visibility: hidden;">This field is required.</label>
+                              </span>
+                              <span class="bi-type v-container wow fadeInRight">
+                                  <div class="form-element-label">Rejting kruzera: </div>
+                                  <select asp-for="noviKruzer.BrojZvezdica" id="bi-business-star">
+                                      <option value="">Choose one...</option>
+                                      <option value="6">******</option>
+                                      <option value="5">*****</option>
+                                      <option value="4">****</option>
+                                      <option value="3">***</option>
+                                      <option value="2">**</option>
+                                      <option value="1">*</option>
+
+                                  </select>
+                                  <div class="error" style="visibility: hidden;">Select one option.</div>
+                              </span>
+                          </div>
+
+
+                          <div class="bi-description wow fadeInLeft">
+                              <div class="form-element-label">Opis: </div>
+                              <textarea class="bi-description-val" maxlength="420" id="desc-val" rows="6" asp-for="noviKruzer.Opis"></textarea>
+                              <label class="error" style="visibility: hidden;">This field is required.</label>
+                          </div>
+                          <div class="bi-image wow fadeInLeft">
+                              <div class="form-element-label">Dodaj sliku: </div>
+                              <div class="bi-images-import">
+                                  <label for="files">Select multiple files: </label>
+                                  <input id="import-files" type="file" accept="image/*" multiple />
+                                  <label class="image-user-info">Import max 5 pictures</label>
+                                  <table style="display:none;" id="import-table" class="table">
+                                      <thead>
+                                      <th>Slika</th>
+                                      <th>Setuj glavnu sliku</th>
+                                      <th>Obrisi</th>
+                                      <th>Ime</th>
+                                      </thead>
+
+                                      <tbody>
+                                      </tbody>
+
+                                  </table>
+                              </div>
+                          <label class="error" style="margin-bottom: 0px">@Model.imageError</label>
+                          </div>
+
+
+                          @*<div id="bi-map-modal" class="modal">
+            <div class="modal-content">
+                <div class="map-title-x"><br /><h3 class="form-element-label">Set marker on your business's location</h3><span class="bi-map-modal-close">&times;</span></div>
+                <div id="bi-map"></div>
+                <label class="btn button-eff" id="doneWithMap" class="register-but">DONE</label>
+            </div>
+        </div>*@
+
+                          <div class="bi-description wow fadeInLeft">
+                              <div class="form-element-label">Kabine: </div><br>
+                              <span>
+                                  New room:  <span>
+                                      <input id="cabin-label" type="text" placeholder="Tip kabine: ">
+                                      <input id="cabin-bed-no" min="1" type="number" placeholder="Kapacitet: ">
+                                  </span>
+                                  <button type="button" onclick="dodajKabinu(this)">Dodaj kabinu</button>
+                              </span>
+
+
+                              <br>
+                          </div>
+                          <br><br><br>
+
+                          @*<input type="text" id="mapLongitude" value="" asp-for="noviHotel.longitude" style="display: none;">
+        <input type="text" id="mapLatitude" value="" asp-for="noviHotel.latitude" style="display: none;">*@
+                          <div class="bi-buttons wow fadeInLeft">
+                              <button class="btn btn-theme1" type="submit" asp-page-handler="next" class="register-but" id="bi-finish">Finish</button>
+
+                          </div>
+                          <script src="js/validateEmail.js"></script>
+                          <input type="text" asp-for="slike[0]" style="display: none;" id="img-src-glavna" value="">
+                          <input type="text" asp-for="slike[1]" style="display: none;" id="img-src-1" value="">
+                          <input type="text" asp-for="slike[2]" style="display: none;" id="img-src-2" value="">
+                          <input type="text" asp-for="slike[3]" style="display: none;" id="img-src-3" value="">
+                          <input type="text" asp-for="slike[4]" style="display: none;" id="img-src-4" value="">
+                      </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function makeMeFileApiPromise(index, output, files, event, filesInput) {
+        return new Promise((resolve, reject) => {
+            output.parentElement.style.display = "table";
+            var file = files[index];
+            if (!file.type.match('image')) {
+                alert("Picture is not valid!")
+                resolve(".");
+                return;
+            }
+            var picReader = new FileReader();
+            picReader.fileName = file.name;
+            picReader.addEventListener("load", function (event) {
+                var picFile = event.target;
+                var tr = document.createElement("tr");
+                tr.className = "imported-picture";
+                let td = document.createElement("td");
+                let img = document.createElement("img");
+                img.width = 150;
+                img.height = 100;
+                img.src = picFile.result;
+                td.appendChild(img);
+                tr.appendChild(td);
+                td = document.createElement("td");
+                let inp = document.createElement("input");
+                inp.type = "radio";
+                inp.name = "mainPicture";
+                td.appendChild(inp);
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.style.fontSize = "30px";
+                let icon = document.createElement("i");
+                icon.className = "fas fa-trash-alt"
+                td.appendChild(icon);
+                tr.appendChild(td);
+                td = document.createElement("td");
+                tr.appendChild(td);
+                let div = document.createElement("div");
+                div.innerHTML = (picFile.fileName.length > 7) ? picFile.fileName.substring(0, 7) + "..." : picFile.fileName;
+                td.appendChild(div);
+                output.appendChild(tr);
+                tr.querySelector("i").onclick = function removePictureAction() {
+                    output.removeChild(tr);
+                    makeOneChecked();
+                    let currImported = document.querySelectorAll(".imported-picture").length;
+                    if (currImported == 0) {
+                        output.parentElement.style.display = "none";
+                        alertUser("Morate upload-ovati barem 1 sliku!");
+                    }
+                    else {
+                        alertUser("");
+                    }
+                    let rows = output.querySelectorAll(".imported-picture");
+                    if (rows.length == 0)
+                        filesInput.value = null;
+                }
+                resolve(".")
+            });
+            picReader.readAsDataURL(file)
+        });
+    }
+    function makeOneChecked() {
+        let rows = document.querySelectorAll(".imported-picture");
+        let oneIsChecked = false;
+        rows.forEach((row) => {
+            if (row.querySelector("input").checked) {
+                oneIsChecked = true;
+            }
+        });
+        if (rows.length > 0) {
+            if (!oneIsChecked) {
+                document.querySelector(".imported-picture").querySelector("input").checked = true;
+            }
+        }
+    }
+    function alertUser(info) {
+        if (info != "") {
+            document.querySelector(".image-user-info").innerHTML = info;
+            document.querySelector(".image-user-info").style.display = "block";
+        }
+        else {
+            document.querySelector(".image-user-info").innerHTML = info;
+            document.querySelector(".image-user-info").style.display = "none";
+        }
+    }
+    window.onload = function () {
+        if (window.File && window.FileList && window.FileReader) {
+            var filesInput = document.getElementById("import-files");
+            filesInput.addEventListener("change", function pictureNotificationMessage(event) {
+                let currImported = document.querySelectorAll(".imported-picture").length;
+                var files = event.target.files; //FileList object
+                var output = document.querySelector("#import-table tbody");
+                var faultyImages = 0;
+                for (let index = 0; index < files.length; index++)
+                    if (!files[index].type.match('image')) {
+                        faultyImages++;
+                    }
+                if (files.length + currImported > 5) {
+                    alertUser("Maksimalan broj slika je 5!")
+                }
+                if (files.length + currImported < 0) {
+                    alertUser("Morate upload-ovati barem 1 sliku!")
+                }
+                //if (files.length - faultyImages + currImported < 5) {
+                //    let pom = 4 - (files.length - faultyImages + currImported);
+                //    if (pom == 1) { alertUser("Upload " + pom + " more picture!"); }
+                //    else { alertUser("Upload " + pom + " more pictures!"); }
+                //}
+                //else if (files.length + currImported > 4) {
+                //    let pom = 4 - currImported;
+                //    if (pom == 1)
+                //        alertUser("Too many pictures imported. Only " + pom + " more allowed!");
+                //    else if (pom == 0)
+                //        alertUser("No more pictures allowed. Remove some if you want to add more");
+                //    else
+                //        alertUser("Too many pictures imported. Only " + pom + " more allowed!");
+                //    return;
+                //}
+                else
+                    alertUser("");
+                let niz = new Array()
+                for (var i = 0; i < files.length; i++) {
+                    let rez = makeMeFileApiPromise(i, output, files, event, filesInput);
+                    niz.push(rez);
+                }
+                Promise.all(niz).then(x => {
+                    console.log(document.querySelectorAll(".imported-picture").length);
+                    makeOneChecked();
+                }).catch(x => {
+                    console.log(document.querySelectorAll(".imported-picture").length);
+                    makeOneChecked()
+                });
+            });
+        }
+        else {
+            console.log("Your browser does not support File API");
+        }
+    }
+</script>
+
+
+
+<script>
+    let counter = 0;
+    function dodajKabinu(ev) {
+        let labela = ev.parentElement.querySelector("#cabin-label");
+        let no = ev.parentElement.querySelector("#cabin-bed-no");
+        if (labela.value == "" || no.value == "")
+            return;
+        let par = ev.parentElement.parentElement;
+        par.appendChild(document.createElement("br"));
+        let el = document.createElement("input");
+        let span = document.createElement("span");
+        span.appendChild(el);
+        let icon = document.createElement("i");
+        icon.className = "fas fa-trash-alt"
+        span.appendChild(icon);
+        icon.onclick = (ev) => {
+            ev.target.parentElement.remove();
+        }
+        par.appendChild(span);
+        el.name = "kabine";
+        el.type = "text";
+        el.readOnly = "disabled";
+        el.value = labela.value + "-" + no.value;
+        counter++;
+    }
+    function formError() {
+        let select = document.querySelector("#bi-business-star");
+        if (select.options[select.selectedIndex].value == "")
+            return true;
+        if (document.querySelector(".bi-description-val").value == "")
+            return true;
+        document.querySelectorAll("input[type=text]").forEach(el => {
+            if (el.value == "" && el.id != "cabin-label")
+                return true;
+        });
+        if (document.querySelectorAll("[name^=kabine]").length == 0)
+            return true;
+    }
+    document.querySelector("#signupForm").onsubmit = function submitFormAction(e) {
+        let pictureIndex = 1;
+        document.querySelectorAll(".imported-picture img").forEach((slika, index) => {
+            if (slika.parentElement.parentElement.querySelector("input").checked) {
+                document.querySelector("#img-src-glavna").value = slika.src;
+            }
+            else {
+                document.querySelector("#img-src-" + pictureIndex).value = slika.src;
+                pictureIndex++;
+            }
+        });
+        if (formError()) {
+            alert("Niste uneli sve neophodne podatke");
+            return false;
+        }
+        return true;
+    }
+</script>

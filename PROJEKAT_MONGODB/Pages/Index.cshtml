@@ -120,10 +120,33 @@
 
 <section class="grids-5">
     <div id="grids5-block" class="py-5">
+        <div class="row mt-5">
+            <div class="grids4-info  col-md-6">
+                <div class="info-bg">
+                    <h5>Pronadjite jedinstveno krstarenje</h5>
+                    <p>
+                    Ako trazite jedinstven i neponovljiv odmor za Vas i Vase najmilije ovo je pravo mesto za Vas. Najbolji izbor kruzera i jahti
+                    za odmor iz snova i to sve u dva klika.
+                    </p>
+                </div>
+            </div>
+            <div class="grids4-info  col-md-6 mt-md-0 mt-5">
+
+                <div class="info-bg">
+                    <h5>Organizujte krstarenje iz snova</h5>
+                    <p>
+                        Posedujete kruzer a niste do sada imali gde da se izreklamirate?
+                    </p>
+                    <p>
+                        Sada je to lako! Registrujte vas nalog i lako i jednostavno oglasite ponude za Vasa krstarenja na najpopularnijem sajtu.
+                    </p>
+
+                </div>
+            </div>
+        </div>
         <div class="container py-md-3">
             <div class="heading text-center mx-auto">
-                <h3 class="head">TOP RATED KRUZERI</h3>
-
+                <h3 class="head">Najbolja ponuda kruzera</h3>
             </div>
             <div class="row mt-5 pt-3">
 
@@ -132,16 +155,19 @@
                 @foreach (var Kruzer in Model.topRated)
                 {
                     <div class="grids4-info col-md-6" style="width: 100px;">
-                        <a href="Hotel-Single?id=@Kruzer.Id"><img src="@Kruzer.GlavnaSlika" class="img-fluid" alt=""></a>
+                        <a href="Hotel-Single?id=@Kruzer.Id"><img src="@Kruzer.Slike[0]" class="img-fluid" alt=""></a>
                         <div class="info-bg">
-                            <h5><a href="KruzerSingle?id=@Kruzer.Id">
-                                @Kruzer.Naziv </a></h5>
-                            @foreach(var grad in Kruzer.Gradovi)
+                            <h5>
+                                <a href="KruzerSingle?id=@Kruzer.Id">
+                                    @Kruzer.Naziv
+                                </a>
+                            </h5>
+                            @foreach (var grad in Kruzer.Gradovi)
                             {
                                 <h6>@grad.Naziv</h6>
 
                             }
-                            
+
                             @*<p>@String.Concat(Hotel.Opis.Substring(0,500), "...") </p>*@
                             @*<p>Hotel </p>*@
 
@@ -156,7 +182,7 @@
 </section>
 
 
-<section class="w3l-feature-3">
+@*<section class="w3l-feature-3">
     <div class="grid top-bottom py-5">
         <div class="container py-md-3">
             <div class="middle-section grid-column text-center">
@@ -181,4 +207,4 @@
             </div>
         </div>
     </div>
-</section>
+</section>*@
