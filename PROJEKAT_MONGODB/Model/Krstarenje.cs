@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 
 namespace PROJEKAT_MONGODB.Model
 {
-    public class Ponuda
+    public class Krstarenje
     {
-        //mozda je ovo trebalo aranzman da se 
         public ObjectId Id { get; set; }
+        public string Linija { get; set; }
         public DateTime Pocetak { get; set; }
         public DateTime Kraj { get; set; }
-        public int Cena { get; set; }
+        public float Cena { get; set; }
+        public List<MongoDBRef> Luke { get; set; }
         public MongoDBRef Kruzer { get; set; }//verovatno sa kruzer pristupis ostalim zaebancijama gradovima drzavama i to, ako nesto treba da se menja promenicemo
     }
 }

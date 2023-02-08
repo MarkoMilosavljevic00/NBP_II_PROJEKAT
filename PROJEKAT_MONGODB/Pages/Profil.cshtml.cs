@@ -13,11 +13,12 @@ namespace PROJEKAT_MONGODB.Pages
 {
     public class ProfilModel : PageModel
     {
-        private readonly IMongoCollection<Kruzer> kr;
-        private readonly IMongoCollection<Ponuda> p;
-        private readonly IMongoCollection<Korisnik> ko;
-        private readonly IMongoCollection<Rezervacija> r;
-        private readonly IMongoCollection<Kabina> k;
+        private readonly IMongoCollection<Kruzer> _dbKruzeri;
+        private readonly IMongoCollection<Krstarenje> _dbKrstarenja;
+        private readonly IMongoCollection<Korisnik> _dbKorisnici;
+        private readonly IMongoCollection<Rezervacija> _dbRezervacije;
+        private readonly IMongoCollection<Kabina> _dbKabine;
+        private readonly IMongoCollection<Luka> _dbLuke;
         [BindProperty]
         public Korisnik menadzer { get; set; }
         [BindProperty]
@@ -25,23 +26,27 @@ namespace PROJEKAT_MONGODB.Pages
         [BindProperty]
         public List<Kabina> kabine { get; set; }
         [BindProperty]
-        public List<Ponuda> ponude { get; set; }
+        public List<Krstarenje> krstarenja { get; set; }
         [BindProperty]
         public List<Rezervacija> rezervacije { get; set; }
+        [BindProperty]
+        public List<List<Luka>> luke { get; set; }
         public string Message { get; set; }
 
         public ProfilModel(IDatabaseSettings settings)
         {
             var client = new MongoClient("mongodb://localhost/?safe=true");
             var database = client.GetDatabase("SEVENSEAS");
-            kr = database.GetCollection<Kruzer>("kruzeri");
-            k = database.GetCollection<Kabina>("kabine");
-            ko = database.GetCollection<Korisnik>("korisnici");
-            p = database.GetCollection<Ponuda>("ponude");
-            r = database.GetCollection<Rezervacija>("rezervacije");
+            _dbKruzeri = database.GetCollection<Kruzer>("kruzeri");
+            _dbKabine = database.GetCollection<Kabina>("kabine");
+            _dbKorisnici = database.GetCollection<Korisnik>("korisnici");
+            _dbKrstarenja = database.GetCollection<Krstarenje>("krstarenja");
+            _dbRezervacije = database.GetCollection<Rezervacija>("rezervacije");
+            _dbLuke = database.GetCollection<Luka>("luke");
             kabine = new List<Kabina>();
-            ponude = new List<Ponuda>();
+            krstarenja = new List<Krstarenje>();
             rezervacije = new List<Rezervacija>();
+            luke = new List<List<Luka>>();
         }
 
         public void OnGet()
@@ -49,26 +54,33 @@ namespace PROJEKAT_MONGODB.Pages
             String email = HttpContext.Session.GetString("Email");
             if (email != null)
             {
-                Korisnik korisnik = ko.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();
+                Korisnik korisnik = _dbKorisnici.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();
                 if (korisnik.Tip == 0)
                     Message = "Menadzer";
                 else Message = "Admin";
             }
 
-            menadzer = ko.Find(x => x.Tip == 0 && x.Email.Equals(email)).FirstOrDefault();
+            menadzer = _dbKorisnici.Find(x => x.Tip == 0 && x.Email.Equals(email)).FirstOrDefault();
             String id = menadzer.Kruzer.Id.ToString();
             //if(id==null)
             //{
             //    return RedirectToPage("/Index");
             //}
-            kruzer = kr.AsQueryable<Kruzer>().Where(x => x.Id == menadzer.Kruzer.Id).FirstOrDefault();
+            kruzer = _dbKruzeri.AsQueryable<Kruzer>().Where(x => x.Id == menadzer.Kruzer.Id).FirstOrDefault();
             foreach (MongoDBRef kabinaRef in kruzer.Kabine.ToList())
             {
-                kabine.Add(k.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
+                kabine.Add(_dbKabine.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
             }
-            foreach (MongoDBRef ponudeRef in kruzer.Ponude.ToList())
+            List<Luka> pom = new List<Luka>();
+            foreach (MongoDBRef krstarenjaRef in kruzer.Krstarenja.ToList())
             {
-                ponude.Add(p.Find(x => x.Id.Equals(new ObjectId(ponudeRef.Id.ToString()))).FirstOrDefault());
+                Krstarenje pomKrs = _dbKrstarenja.Find(x => x.Id.Equals(new ObjectId(krstarenjaRef.Id.ToString()))).FirstOrDefault();
+                krstarenja.Add(pomKrs);
+                foreach(MongoDBRef lukaRef in pomKrs.Luke.ToList())
+                {
+                    pom.Add(_dbLuke.Find(x => x.Id.Equals(new ObjectId(lukaRef.Id.ToString()))).FirstOrDefault());
+                }
+                luke.Add(pom);
             }
         }
 
@@ -76,24 +88,24 @@ namespace PROJEKAT_MONGODB.Pages
         {
             String email = HttpContext.Session.GetString("Email");
 
-            menadzer = ko.Find(x => x.Tip == 0 && x.Email.Equals(email)).FirstOrDefault();
-            kruzer = kr.Find(x => x.Id.Equals(new ObjectId(menadzer.Kruzer.Id.ToString()))).FirstOrDefault();
+            menadzer = _dbKorisnici.Find(x => x.Tip == 0 && x.Email.Equals(email)).FirstOrDefault();
+            kruzer = _dbKruzeri.Find(x => x.Id.Equals(new ObjectId(menadzer.Kruzer.Id.ToString()))).FirstOrDefault();
 
             foreach (MongoDBRef kabinaRef in kruzer.Kabine.ToList())
             {
-                kabine.Add(k.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
+                kabine.Add(_dbKabine.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
             }
             Kabina soba = kabine.Where(x => x.BrojKabine.Equals(oznaka)).FirstOrDefault();
             List<Rezervacija> rez = new List<Rezervacija>();
-            List<Ponuda> ar = new List<Ponuda>();
+            List<Krstarenje> ar = new List<Krstarenje>();
 
             foreach (MongoDBRef rezRef in soba.Rezervacije.ToList())
             {
-                rez.Add(r.Find(x => x.Id.Equals(new ObjectId(rezRef.Id.ToString()))).FirstOrDefault());
+                rez.Add(_dbRezervacije.Find(x => x.Id.Equals(new ObjectId(rezRef.Id.ToString()))).FirstOrDefault());
             }
             foreach (Rezervacija Rez in rez)
             {
-                ar.Add(p.Find(x => x.Id.Equals(new ObjectId(Rez.Ponuda.Id.ToString()))).FirstOrDefault());
+                ar.Add(_dbKrstarenja.Find(x => x.Id.Equals(new ObjectId(Rez.Ponuda.Id.ToString()))).FirstOrDefault());
             }
 
             List<string> datum = new List<string>();

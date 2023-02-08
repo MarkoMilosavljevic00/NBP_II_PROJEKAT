@@ -18,7 +18,7 @@ namespace PROJEKAT_MONGODB.Pages
             var client = new MongoClient("mongodb://localhost/?safe=true");
             var db = client.GetDatabase("SEVENSEAS");
             var collectionKruzeri = db.GetCollection<Kruzer>("kruzeri");
-            var collectionGradovi = db.GetCollection<Grad>("gradovi");
+            var collectionGradovi = db.GetCollection<Luka>("gradovi");
             var collectionKorisnici = db.GetCollection<Korisnik>("korisnici");
 
             String email = HttpContext.Session.GetString("Email");
@@ -40,13 +40,13 @@ namespace PROJEKAT_MONGODB.Pages
             {
                 Drzava d = new Drzava();
                 d.Naziv = drzava;
-                d.Gradovi = new List<Grad>();
+                d.Gradovi = new List<Luka>();
                 //d.gradovi = collection.AsQueryable<Hotel>().Where(x=>x.Drzava == drzava).OrderBy(x=>x.Grad).Select(x=>x.Grad).Distinct().ToList();
                 //List<string> gradoviDrzave = collectionKruzeri.AsQueryable<Kruzer>().Where(x => x.Drzave == drzava).Select(x => x.Grad).Distinct().ToList();
                 List<string> gradoviDrzave = (List<string>)collectionKruzeri.AsQueryable<Kruzer>().Where(x => x.Drzave.Any(y => y.Naziv == drzava)).SelectMany(x => x.Gradovi).Select(z=>z.Naziv).Distinct().ToList();
                 foreach (string grad in gradoviDrzave)
                 {
-                    Grad g = collectionGradovi.AsQueryable<Grad>().Where(x => x.Naziv == grad).FirstOrDefault();
+                    Luka g = collectionGradovi.AsQueryable<Luka>().Where(x => x.Naziv == grad).FirstOrDefault();
                     d.Gradovi.Add(g);
                 }
                 listaDrzava.Add(d);

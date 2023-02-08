@@ -18,7 +18,7 @@ namespace PROJEKAT_MONGODB.Pages
         private readonly IMongoCollection<Korisnik> _dbKorisnici;
         private readonly IMongoCollection<Kruzer> _dbKruzeri;
         private readonly IMongoCollection<Kabina> _dbKabine;
-        private readonly IMongoCollection<Grad> _dbGradovi;
+        private readonly IMongoCollection<Luka> _dbGradovi;
         public DodavanjeKruzera(IWebHostEnvironment ev, IDatabaseSettings settings)
         {
             _environment = ev;
@@ -27,7 +27,7 @@ namespace PROJEKAT_MONGODB.Pages
             _dbKorisnici = database.GetCollection<Korisnik>("korisnici");
             _dbKruzeri = database.GetCollection<Kruzer>("kruzeri");
             _dbKabine = database.GetCollection<Kabina>("kabine");
-            _dbGradovi = database.GetCollection<Grad>("gradovi");
+            _dbGradovi = database.GetCollection<Luka>("gradovi");
 
         }
         //[BindProperty]
@@ -97,7 +97,6 @@ namespace PROJEKAT_MONGODB.Pages
             string fileName = "";
             try
             {
-                noviKruzer.Slike = new List<string>();
                 for(int i=0; i<slike.Length; i++)
                 {
                     if(!string.IsNullOrEmpty(slike[i]))

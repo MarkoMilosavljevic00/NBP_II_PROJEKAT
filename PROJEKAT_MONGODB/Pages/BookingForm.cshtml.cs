@@ -18,7 +18,7 @@ namespace PROJEKAT_MONGODB.Pages
         [BindProperty]
         public Kruzer Kruzer { get; set; }
         [BindProperty]
-        public Ponuda ponuda { get; set; }
+        public Krstarenje ponuda { get; set; }
 
         [BindProperty]
         public string KruzerId { get; set; }
@@ -36,7 +36,7 @@ namespace PROJEKAT_MONGODB.Pages
         [BindProperty]
         public int brojMesta { get; set; }
         private readonly IMongoCollection<Kruzer> _dbKruzeri;
-        private readonly IMongoCollection<Ponuda> _dbPonude;
+        private readonly IMongoCollection<Krstarenje> _dbPonude;
         private readonly IMongoCollection<Rezervacija> _dbRezervacije;
         private readonly IMongoCollection<Kabina> _dbKabine;
         private readonly IMongoCollection<Korisnik> _dbKorisnici;
@@ -45,7 +45,7 @@ namespace PROJEKAT_MONGODB.Pages
             var client = new MongoClient("mongodb://localhost/?safe=true");
             var database = client.GetDatabase("SEVENSEAS");
             _dbKruzeri = database.GetCollection<Kruzer>("kruzeri");
-            _dbPonude = database.GetCollection<Ponuda>("ponude");
+            _dbPonude = database.GetCollection<Krstarenje>("ponude");
             _dbRezervacije = database.GetCollection<Rezervacija>("rezervacije");
             _dbKabine = database.GetCollection<Kabina>("kabine");
             _dbKorisnici = database.GetCollection<Korisnik>("korisnici");
@@ -68,14 +68,14 @@ namespace PROJEKAT_MONGODB.Pages
             KruzerId = kruzer;
             ponudaId = id;
             // List<Aranzman> zav=_dbAranzmani.Find(ar=>true).ToList();
-            List<Ponuda> zabranjenePonude= _dbPonude.Find(p => p.Kruzer.Id == Kruzer.Id &&
+            List<Krstarenje> zabranjenePonude= _dbPonude.Find(p => p.Kruzer.Id == Kruzer.Id &&
                                    (
                                    (p.Pocetak.CompareTo(ponuda.Pocetak) >= 0 && p.Pocetak.CompareTo(ponuda.Kraj) <= 0) ||
                                    (p.Kraj.CompareTo(ponuda.Pocetak) >= 0 && p.Kraj.CompareTo(ponuda.Kraj) <= 0) ||
                                    (p.Pocetak.CompareTo(ponuda.Pocetak) < 0 && p.Kraj.CompareTo(ponuda.Kraj) > 0)
                                    )).ToList();
             List<Rezervacija> zabranjeneRezervacije = new List<Rezervacija>();
-            foreach (Ponuda p in zabranjenePonude)
+            foreach (Krstarenje p in zabranjenePonude)
             {
                 zabranjeneRezervacije.AddRange(_dbRezervacije.Find(rez => rez.Ponuda.Id == p.Id).ToList());
             }
@@ -116,7 +116,7 @@ namespace PROJEKAT_MONGODB.Pages
 
             Kruzer = await _dbKruzeri.Find(h => h.Id == new ObjectId(KruzerId)).FirstOrDefaultAsync();
             ponuda = await _dbPonude.Find(a => a.Id == new ObjectId(ponudaId)).FirstOrDefaultAsync();
-            List<Ponuda> zabranjenePonude = _dbPonude.Find(a => a.Kruzer.Id.Equals(Kruzer.Id) &&
+            List<Krstarenje> zabranjenePonude = _dbPonude.Find(a => a.Kruzer.Id.Equals(Kruzer.Id) &&
                                   (
                                   (a.Pocetak.CompareTo(ponuda.Pocetak) >= 0 && a.Pocetak.CompareTo(ponuda.Kraj) <= 0) ||
                                   (a.Kraj.CompareTo(ponuda.Pocetak) >= 0 && a.Kraj.CompareTo(ponuda.Kraj) <= 0) ||
@@ -124,7 +124,7 @@ namespace PROJEKAT_MONGODB.Pages
                                   )).ToList();
 
             List<Rezervacija> zabranjeneRezervacije = new List<Rezervacija>();
-            foreach (Ponuda p in zabranjenePonude)
+            foreach (Krstarenje p in zabranjenePonude)
             {
                 zabranjeneRezervacije.AddRange(_dbRezervacije.Find(rez => rez.Ponuda.Id == p.Id).ToList());
             }

@@ -1,0 +1,71 @@
+﻿@page
+@model PROJEKAT_MONGODB.Pages.DodajKrstarenjeModel
+@{
+}
+<style>
+    #signupForm {
+        margin-left: 20px;
+    }
+</style>
+<form action="" method="post" id="signupForm" style="width: 250px;">
+    <br><br><div style="width:100%;display: flex;flex-direction:row;justify-content:space-between;">
+        <h3>Unos informacija o krstarenju za kruzer @Model.kruzer.Naziv i putovanje:</h3>
+        <h3>Prolazi kroz sledece gradove:</h3>
+        @foreach (var grad in Model.kruzer.Gradovi)
+        {
+
+            <h3>
+                @grad.Naziv
+            </h3>
+        }
+        <h3>Prolazi kroz sledece drzave:</h3>
+        @foreach (var drzava in Model.kruzer.Drzave)
+        {
+            <h3>@drzava.Naziv</h3>
+        }
+        <br><br>
+
+    </div><br><br>
+    <input type="hidden" asp-for=@Model.kruzerID>
+    <span class="bi-city wow fadeInRight">
+        <div class="form-element-label">Pocetak aranzmana*</div>
+        <input type="date" id="pickerStart" name="pocetak">
+    </span><br><br>
+    <span class="bi-city wow fadeInRight">
+        <div class="form-element-label">Kraj aranzmana*</div>
+        <input type="date" id="pickerEnd" name="kraj">
+    </span><br><br>
+    <span class="bi-city wow fadeInRight">
+        <div class="form-element-label">Cena ponude u evrima*</div>
+        <input type="number" asp-for=@Model.cena id="cena" min="1" value="1">
+    </span><br><br><br><br><br><br>
+    <button class="btn button-eff">Dodaj</button>
+</form>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+
+        document.querySelector("#pickerStart").min = new Date().toISOString().split("T")[0];
+        document.querySelector("#pickerEnd").min = new Date(new Date().getTime() + 86400000).toISOString().split('T')[0];
+    })
+
+    function allGood() {
+        if (document.querySelector("#pickerStart").value < new Date().toISOString().split("T")[0])
+            return false;
+        if (document.querySelector("#pickerEnd").value < new Date(new Date().getTime() + 86400000).toISOString().split('T')[0])
+            return false;
+        if (document.querySelector("#pickerStart").value > document.querySelector("#pickerEnd").value)
+            return false;
+        if (document.querySelector("#cena").value < 1) return false;
+        return true;
+    }
+
+    document.querySelector("#signupForm").onsubmit = () => {
+        if (!allGood()) {
+            alert("uneti podaci nisu ispravni");
+            return false;
+        }
+    }
+
+</script>

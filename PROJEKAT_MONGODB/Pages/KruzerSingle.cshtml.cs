@@ -14,11 +14,11 @@ namespace PROJEKAT_MONGODB.Pages
     public class KruzerSingleModel : PageModel
     {
         private readonly IMongoCollection<Kruzer> kr;
-        private readonly IMongoCollection<Ponuda> p;
+        private readonly IMongoCollection<Krstarenje> p;
         private readonly IMongoCollection<Kabina> ka;
         private readonly IMongoCollection<Korisnik> ko;
         public Kruzer kruzer { get; set; }
-        public List<Ponuda> ponude { get; set; }
+        public List<Krstarenje> ponude { get; set; }
         public List<Kabina> kabine { get; set; }
         public string Message { get; set; }
 
@@ -29,9 +29,9 @@ namespace PROJEKAT_MONGODB.Pages
             kr = database.GetCollection<Kruzer>("kruzeri");
             ka = database.GetCollection<Kabina>("kabine");
             ko = database.GetCollection<Korisnik>("korisnici");
-            p = database.GetCollection<Ponuda>("ponude");
+            p = database.GetCollection<Krstarenje>("ponude");
             kabine = new List<Kabina>();
-            ponude = new List<Ponuda>();
+            ponude = new List<Krstarenje>();
         }
 
         public void OnGet(string id)

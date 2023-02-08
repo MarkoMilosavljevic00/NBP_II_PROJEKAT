@@ -15,7 +15,7 @@ namespace PROJEKAT_MONGODB.Pages
     public class AdminModel : PageModel
     {
         private readonly IMongoCollection<Kruzer> kr;//h
-        private readonly IMongoCollection<Ponuda> p;//a
+        private readonly IMongoCollection<Krstarenje> p;//a
         private readonly IMongoCollection<Korisnik> ko;//k
         private readonly IMongoCollection<Rezervacija> r;//r
         private readonly IMongoCollection<Kabina> ka;//s
@@ -28,7 +28,7 @@ namespace PROJEKAT_MONGODB.Pages
         [BindProperty]
         public List<Kruzer> kruzeriMenadzera { get; set; }//hoteliMedandzera
         [BindProperty]
-        public List<Ponuda> ponudeRezervacija { get; set; }//aranzmani ponuda
+        public List<Krstarenje> ponudeRezervacija { get; set; }//aranzmani ponuda
         [BindProperty]
         public List<Kruzer> kruzeriRezervacija { get; set; }//hotelirezervacija
         [BindProperty]
@@ -36,7 +36,7 @@ namespace PROJEKAT_MONGODB.Pages
         [BindProperty]
         public List<Korisnik> menadzeri { get; set; }
         [BindProperty]
-        public List<Ponuda> ponude { get; set; }//aranzmani
+        public List<Krstarenje> ponude { get; set; }//aranzmani
         [BindProperty]
         public List<Kruzer> kruzeriPonuda { get; set; }//hoteliaranzmana
         public string Message { get; set; }
@@ -48,14 +48,14 @@ namespace PROJEKAT_MONGODB.Pages
             kr = database.GetCollection<Kruzer>("kruzeri");
             ka = database.GetCollection<Kabina>("kabine");
             ko = database.GetCollection<Korisnik>("korisnici");
-            p = database.GetCollection<Ponuda>("ponude");
+            p = database.GetCollection<Krstarenje>("ponude");
             r = database.GetCollection<Rezervacija>("rezervacije");
             kruzeriMenadzera = new List<Kruzer>();
             menadzeriRezervacija = new List<Korisnik>();
-            ponudeRezervacija = new List<Ponuda>();
+            ponudeRezervacija = new List<Krstarenje>();
             kruzeriRezervacija = new List<Kruzer>();
             menadzeri = new List<Korisnik>();
-            ponude = new List<Ponuda>();
+            ponude = new List<Krstarenje>();
             kruzeriPonuda = new List<Kruzer>();
         }
 
@@ -145,7 +145,7 @@ namespace PROJEKAT_MONGODB.Pages
             //brisanje aranzmana vezanih za hotel
             foreach (MongoDBRef ponudaRef in kruzer.Ponude.ToList())
             {
-                var filter3 = Builders<Ponuda>.Filter.Eq("Id", ponudaRef.Id);
+                var filter3 = Builders<Krstarenje>.Filter.Eq("Id", ponudaRef.Id);
                 p.DeleteOne(filter3);
             }
             //brisanje rezervacija vezanih za taj hotel

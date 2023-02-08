@@ -8,7 +8,7 @@
             <div style="margin-bottom:10px;" class="tabelaRez-info">
                 <div class="tab">
                     <button class="tablinks" onclick="openTable(event, 'Reservations')">Reservations</button>
-                    <button class="tablinks" onclick="openTable(event, 'Offers')">Offers</button>
+                    <button class="tablinks" onclick="openTable(event, 'Krstarenja')">Krstarenja</button>
                     <button class="tablinks" onclick="openTable(event, 'Rooms')">Rooms</button>
                 </div>
 
@@ -40,12 +40,12 @@
                     </div>
                 </div>
 
-                <div id="Offers" class="tabcontent">
-                    <h4 class="predstojece-rez">Offers</h4>
-                    <button><a asp-page="/AddPonuda" asp-route-kruzerId=@Model.kruzer.Id.ToString()> Add offer</a></button>
-                    @if (Model.ponude.Count == 0)
+                <div id="Krstarenja" class="tabcontent">
+                    <h4 class="predstojece-rez">Dostupne linije: </h4>
+                    <button><a asp-page="/DodajKrstarenje" asp-route-kruzerId=@Model.kruzer.Id.ToString()> Dodaj Novo Krstarenje</a></button>
+                    @if (Model.krstarenja.Count == 0)
                     {
-                        <label class="nema-rez">There are no offers!</label>
+                        <label class="nema-rez">Niste dodali nijednu liniju putovanja!</label>
                     }
                     else
                     {
@@ -53,19 +53,30 @@
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
                                     <tr>
-                                        <th>Start date</th>
-                                        <th>End date</th>
-                                        <th>Price</th>
+                                        <th>Linija</th>
+                                        <th>Luke</th>
+                                        <th>Pocetak</th>
+                                        <th>Kraj</th>
+                                        <th>Cena</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var a in @Model.ponude)
+                                    @for (int i=0; i<Model.krstarenja.Count; i++)
                                     {
-                                        <tr>
-                                            <td>@a.Pocetak.ToString("dd.MM.yyyy.")</td>
-                                            <td>@a.Kraj.ToString("dd.MM.yyyy.")</td>
-                                            <td>@a.Cena</td>
-                                        </tr>
+                                        string nizLuka = "";
+                                        for(int j=0; j<Model.luke[i].Count; j++)
+                                        {
+                                            nizLuka = Model.luke[i][j].Naziv + '-' + Model.luke[i][j].Mesto;
+                                            if (Model.luke[i].Last() != Model.luke[i][j])
+                                                nizLuka += ',';
+                                        }
+                                    <tr>
+                                        <td>@Model.krstarenja[i].Linija</td>
+                                        <td>@nizLuka</td>
+                                        <td>@Model.krstarenja[i].Pocetak.ToString("dd.MM.yyyy.")</td>
+                                        <td>@Model.krstarenja[i].Kraj.ToString("dd.MM.yyyy.")</td>
+                                        <td>@Model.krstarenja[i].Cena</td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

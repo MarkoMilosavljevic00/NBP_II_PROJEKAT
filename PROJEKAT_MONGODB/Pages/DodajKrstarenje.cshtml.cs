@@ -11,7 +11,7 @@ using MongoDB.Bson;
 
 namespace PROJEKAT_MONGODB.Pages
 {
-    public class AddPonudaModel : PageModel
+    public class DodajKrstarenjeModel : PageModel
     {
         [BindProperty]
         public string kruzerID { get; set; }
@@ -24,15 +24,15 @@ namespace PROJEKAT_MONGODB.Pages
         [BindProperty]
         public int cena { get; set; }
         private readonly IMongoCollection<Kruzer> _dbKruzeri;
-        private readonly IMongoCollection<Ponuda> _dbPonude;
+        private readonly IMongoCollection<Krstarenje> _dbPonude;
         private readonly IMongoCollection<Korisnik> _dbKorisnici;
         public string Message { get; set; }
-        public AddPonudaModel(IDatabaseSettings settings)
+        public DodajKrstarenjeModel(IDatabaseSettings settings)
         {
             var client = new MongoClient("mongodb://localhost/?safe=true");
             var database = client.GetDatabase("SEVENSEAS");
             _dbKruzeri = database.GetCollection<Kruzer>("kruzeri");
-            _dbPonude = database.GetCollection<Ponuda>("ponude");
+            _dbPonude = database.GetCollection<Krstarenje>("ponude");
             _dbKorisnici = database.GetCollection<Korisnik>("korisnici");
         }
 
@@ -44,7 +44,7 @@ namespace PROJEKAT_MONGODB.Pages
             {
                 Korisnik k = _dbKorisnici.AsQueryable<Korisnik>().Where(x => x.Email == email).FirstOrDefault();
                 if (k.Tip == 1)
-                { return RedirectToPage("/Login"); }
+                { return RedirectToPage("/Prijava"); }
                 else { Message = "Menadzer"; }
             }
 
@@ -58,7 +58,7 @@ namespace PROJEKAT_MONGODB.Pages
         {
 
             if (pocetak.CompareTo(kraj) > 0 || cena < 1) return Page();
-            Ponuda novaPonuda = new Ponuda();
+            Krstarenje novaPonuda = new Krstarenje();
             novaPonuda.Cena = cena;
             novaPonuda.Pocetak = new DateTime(pocetak.Ticks, DateTimeKind.Utc);
             novaPonuda.Kraj = new DateTime(kraj.Ticks, DateTimeKind.Utc);
