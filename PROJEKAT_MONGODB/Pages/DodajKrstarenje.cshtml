@@ -9,37 +9,86 @@
 </style>
 <form action="" method="post" id="signupForm" style="width: 250px;">
     <br><br><div style="width:100%;display: flex;flex-direction:row;justify-content:space-between;">
-        <h3>Unos informacija o krstarenju za kruzer @Model.kruzer.Naziv i putovanje:</h3>
-        <h3>Prolazi kroz sledece gradove:</h3>
-        @foreach (var grad in Model.kruzer.Gradovi)
-        {
+        <h3>Unos informacija o krstarenju za kruzer @Model.kruzer.Naziv: </h3>
+        @*<h3>Prolazi kroz sledece gradove:</h3>
+            @foreach (var grad in Model.kruzer.Gradovi)
+            {
 
-            <h3>
-                @grad.Naziv
-            </h3>
-        }
-        <h3>Prolazi kroz sledece drzave:</h3>
-        @foreach (var drzava in Model.kruzer.Drzave)
-        {
-            <h3>@drzava.Naziv</h3>
-        }
-        <br><br>
+                <h3>
+                    @grad.Naziv
+                </h3>
+            }
+            <h3>Prolazi kroz sledece drzave:</h3>
+            @foreach (var drzava in Model.kruzer.Drzave)
+            {
+                <h3>@drzava.Naziv</h3>
+            }
+            <br><br>*@
 
     </div><br><br>
     <input type="hidden" asp-for=@Model.kruzerID>
     <span class="bi-city wow fadeInRight">
-        <div class="form-element-label">Pocetak aranzmana*</div>
-        <input type="date" id="pickerStart" name="pocetak">
+        <div class="form-element-label">Destinacija: </div>
+        <input type="text" asp-for="destinacija" id="destination" name="destinacija">
     </span><br><br>
     <span class="bi-city wow fadeInRight">
-        <div class="form-element-label">Kraj aranzmana*</div>
-        <input type="date" id="pickerEnd" name="kraj">
+        <div class="form-element-label">Pocetak: </div>
+        <input type="date" asp-for="pocetak" id="pickerStart" name="pocetak">
     </span><br><br>
     <span class="bi-city wow fadeInRight">
-        <div class="form-element-label">Cena ponude u evrima*</div>
-        <input type="number" asp-for=@Model.cena id="cena" min="1" value="1">
-    </span><br><br><br><br><br><br>
-    <button class="btn button-eff">Dodaj</button>
+        <div class="form-element-label">Kraj: </div>
+        <input type="date" asp-for="kraj" id="pickerEnd" name="kraj">
+    </span><br><br>
+    <span class="bi-city wow fadeInRight">
+        <div class="form-element-label">Cena: </div>
+        <input type="number" asp-for="cena" id="cena" min="1" value="1">
+    </span><br><br>
+    <span class="bi-description wow fadeInLeft">
+        <div class="form-element-label">Opis: </div>
+        <textarea class="bi-description-val" maxlength="420" id="desc-val" rows="6" asp-for="opis"></textarea>
+    </span><br><br>
+    <span class="bi-image wow fadeInLeft">
+        <div class="form-element-label">Dodaj sliku: </div>
+        <div class="bi-images-import">
+            <label for="files">Select multiple files: </label>
+            <input id="import-files" type="file" accept="image/*" multiple />
+            <label class="image-user-info">Import max 5 pictures</label>
+            <table style="display:none;" id="import-table" class="table">
+                <thead>
+                <th>Slika</th>
+                <th>Setuj glavnu sliku</th>
+                <th>Obrisi</th>
+                <th>Ime</th>
+                </thead>
+
+                <tbody>
+                </tbody>
+
+            </table>
+        </div>
+        <label class="error" style="margin-bottom: 0px">@Model.imageError</label>
+    </span>
+    <br><br><br><br>
+    <button class="btn type=" submit" button-eff">Dodaj</button>
+    <input type="text" asp-for="slike[0]" style="display: none;" id="img-src-glavna" value="">
+    <input type="text" asp-for="slike[1]" style="display: none;" id="img-src-1" value="">
+    <input type="text" asp-for="slike[2]" style="display: none;" id="img-src-2" value="">
+    <input type="text" asp-for="slike[3]" style="display: none;" id="img-src-3" value="">
+    <input type="text" asp-for="slike[4]" style="display: none;" id="img-src-4" value="">
+
+    <div class="bi-description wow fadeInLeft">
+        <div class="form-element-label">Luke: </div><br>
+        <span>
+            Luke na kojima se pristaje:  <span>
+                <input id="port" type="text" placeholder="Naziv luke: ">
+                <input id="location" type="text" placeholder="Mesto u kojoj se luka nalazi: ">
+            </span>
+            <button type="button" onclick="dodajLuku(this)">Dodaj luku</button>
+        </span>
+
+
+        <br>
+    </div>
 </form>
 
 
@@ -50,22 +99,193 @@
         document.querySelector("#pickerEnd").min = new Date(new Date().getTime() + 86400000).toISOString().split('T')[0];
     })
 
-    function allGood() {
+    function validate() {
         if (document.querySelector("#pickerStart").value < new Date().toISOString().split("T")[0])
             return false;
         if (document.querySelector("#pickerEnd").value < new Date(new Date().getTime() + 86400000).toISOString().split('T')[0])
             return false;
         if (document.querySelector("#pickerStart").value > document.querySelector("#pickerEnd").value)
             return false;
-        if (document.querySelector("#cena").value < 1) return false;
+        if (document.querySelector("#cena").value < 1)
+            return false;
+        if (document.querySelectorAll("[name^=luke]").length == 0)
+            return false;
         return true;
     }
 
     document.querySelector("#signupForm").onsubmit = () => {
-        if (!allGood()) {
+        if (!validate()) {
             alert("uneti podaci nisu ispravni");
             return false;
         }
     }
 
+</script>
+
+<script>
+    function makeMeFileApiPromise(index, output, files, event, filesInput) {
+        return new Promise((resolve, reject) => {
+            output.parentElement.style.display = "table";
+            var file = files[index];
+            if (!file.type.match('image')) {
+                alert("Picture is not valid!")
+                resolve(".");
+                return;
+            }
+            var picReader = new FileReader();
+            picReader.fileName = file.name;
+            picReader.addEventListener("load", function (event) {
+                var picFile = event.target;
+                var tr = document.createElement("tr");
+                tr.className = "imported-picture";
+                let td = document.createElement("td");
+                let img = document.createElement("img");
+                img.width = 150;
+                img.height = 100;
+                img.src = picFile.result;
+                td.appendChild(img);
+                tr.appendChild(td);
+                td = document.createElement("td");
+                let inp = document.createElement("input");
+                inp.type = "radio";
+                inp.name = "mainPicture";
+                td.appendChild(inp);
+                tr.appendChild(td);
+                td = document.createElement("td");
+                td.style.fontSize = "30px";
+                let icon = document.createElement("i");
+                icon.className = "fas fa-trash-alt"
+                td.appendChild(icon);
+                tr.appendChild(td);
+                td = document.createElement("td");
+                tr.appendChild(td);
+                let div = document.createElement("div");
+                div.innerHTML = (picFile.fileName.length > 7) ? picFile.fileName.substring(0, 7) + "..." : picFile.fileName;
+                td.appendChild(div);
+                output.appendChild(tr);
+                tr.querySelector("i").onclick = function removePictureAction() {
+                    output.removeChild(tr);
+                    makeOneChecked();
+                    let currImported = document.querySelectorAll(".imported-picture").length;
+                    if (currImported == 0) {
+                        output.parentElement.style.display = "none";
+                        alertUser("Morate upload-ovati barem 1 sliku!");
+                    }
+                    else {
+                        alertUser("");
+                    }
+                    let rows = output.querySelectorAll(".imported-picture");
+                    if (rows.length == 0)
+                        filesInput.value = null;
+                }
+                resolve(".")
+            });
+            picReader.readAsDataURL(file)
+        });
+    }
+    function makeOneChecked() {
+        let rows = document.querySelectorAll(".imported-picture");
+        let oneIsChecked = false;
+        rows.forEach((row) => {
+            if (row.querySelector("input").checked) {
+                oneIsChecked = true;
+            }
+        });
+        if (rows.length > 0) {
+            if (!oneIsChecked) {
+                document.querySelector(".imported-picture").querySelector("input").checked = true;
+            }
+        }
+    }
+    function alertUser(info) {
+        if (info != "") {
+            document.querySelector(".image-user-info").innerHTML = info;
+            document.querySelector(".image-user-info").style.display = "block";
+        }
+        else {
+            document.querySelector(".image-user-info").innerHTML = info;
+            document.querySelector(".image-user-info").style.display = "none";
+        }
+    }
+    window.onload = function () {
+        if (window.File && window.FileList && window.FileReader) {
+            var filesInput = document.getElementById("import-files");
+            filesInput.addEventListener("change", function pictureNotificationMessage(event) {
+                let currImported = document.querySelectorAll(".imported-picture").length;
+                var files = event.target.files; //FileList object
+                var output = document.querySelector("#import-table tbody");
+                var faultyImages = 0;
+                for (let index = 0; index < files.length; index++)
+                    if (!files[index].type.match('image')) {
+                        faultyImages++;
+                    }
+                if (files.length + currImported > 5) {
+                    alertUser("Maksimalan broj slika je 5!")
+                }
+                if (files.length + currImported < 0) {
+                    alertUser("Morate upload-ovati barem 1 sliku!")
+                }
+                else
+                    alertUser("");
+                let niz = new Array()
+                for (var i = 0; i < files.length; i++) {
+                    let rez = makeMeFileApiPromise(i, output, files, event, filesInput);
+                    niz.push(rez);
+                }
+                Promise.all(niz).then(x => {
+                    console.log(document.querySelectorAll(".imported-picture").length);
+                    makeOneChecked();
+                }).catch(x => {
+                    console.log(document.querySelectorAll(".imported-picture").length);
+                    makeOneChecked()
+                });
+            });
+        }
+        else {
+            console.log("Your browser does not support File API");
+        }
+    }
+
+    document.querySelector("#signupForm").onsubmit = function submitFormAction(e) {
+        let pictureIndex = 1;
+        document.querySelectorAll(".imported-picture img").forEach((slika, index) => {
+            if (slika.parentElement.parentElement.querySelector("input").checked) {
+                document.querySelector("#img-src-glavna").value = slika.src;
+            }
+            else {
+                document.querySelector("#img-src-" + pictureIndex).value = slika.src;
+                pictureIndex++;
+            }
+        });
+        if (formError()) {
+            alert("Niste uneli sve neophodne podatke");
+            return false;
+        }
+        return true;
+    }
+
+    let counter = 0;
+    function dodajLuku(ev) {
+        let labela = ev.parentElement.querySelector("#port");
+        let mesto = ev.parentElement.querySelector("#location");
+        if (labela.value == "" || mesto.value == "")
+            return;
+        let par = ev.parentElement.parentElement;
+        par.appendChild(document.createElement("br"));
+        let el = document.createElement("input");
+        let span = document.createElement("span");
+        span.appendChild(el);
+        let icon = document.createElement("i");
+        icon.className = "fas fa-trash-alt"
+        span.appendChild(icon);
+        icon.onclick = (ev) => {
+            ev.target.parentElement.remove();
+        }
+        par.appendChild(span);
+        el.name = "luke";
+        el.type = "text";
+        el.readOnly = "disabled";
+        el.value = labela.value + ", " + mesto.value;
+        counter++;
+    }
 </script>

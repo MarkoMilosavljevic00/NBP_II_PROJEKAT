@@ -12,8 +12,6 @@ namespace PROJEKAT_MONGODB.Model
         public ObjectId Id { get; set; }
         public string Naziv { get; set; }
         public string Mesto { get; set; }
-        public string Drzava { get; set; }
-        public string Opis { get; set; }
-        public string Slika { get; set; }
+        //public string Drzava { get; set; }
     }
 }

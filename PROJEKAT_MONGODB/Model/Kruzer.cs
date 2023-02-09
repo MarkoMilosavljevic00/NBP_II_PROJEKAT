@@ -24,6 +24,7 @@ namespace PROJEKAT_MONGODB.Model
         //public string Slika3 { get; set; }
         //public double longitude { get; set; } //ovo nzm da l nam treba
         //public double latitude { get; set; }
+        public List<MongoDBRef> Ponude { get; set; } = new List<MongoDBRef>();
         public List<MongoDBRef> Krstarenja { get; set; } = new List<MongoDBRef>();
         public List<MongoDBRef> Kabine { get; set; } = new List<MongoDBRef>();
     }

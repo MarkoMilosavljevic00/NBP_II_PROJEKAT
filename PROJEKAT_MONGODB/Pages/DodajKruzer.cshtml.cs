@@ -12,14 +12,14 @@ using System.IO;
 
 namespace PROJEKAT_MONGODB.Pages
 {
-    public class DodavanjeKruzera : PageModel
+    public class DodajKruzer : PageModel
     {
         private IWebHostEnvironment _environment;
         private readonly IMongoCollection<Korisnik> _dbKorisnici;
         private readonly IMongoCollection<Kruzer> _dbKruzeri;
         private readonly IMongoCollection<Kabina> _dbKabine;
         private readonly IMongoCollection<Luka> _dbGradovi;
-        public DodavanjeKruzera(IWebHostEnvironment ev, IDatabaseSettings settings)
+        public DodajKruzer(IWebHostEnvironment ev, IDatabaseSettings settings)
         {
             _environment = ev;
             var client = new MongoClient("mongodb://localhost/?safe=true");
@@ -72,26 +72,11 @@ namespace PROJEKAT_MONGODB.Pages
                 return RedirectToPage("/Index");
             Korisnik kor = await _dbKorisnici.Find(kor => kor.Email == HttpContext.Session.GetString("Email")).FirstOrDefaultAsync();
 
-            List<Kabina> noveKabine = new List<Kabina>();
-            foreach (string k in kabine)
-            {
-                Kabina novaKabina = new Kabina();
-                string labela = k.Substring(0, k.LastIndexOf('-'));
-                int kapacitet;
-                bool uspesno = Int32.TryParse(k.Substring(k.LastIndexOf('-') + 1), out kapacitet);
-                if (!uspesno) return RedirectToPage("/Error");
-                novaKabina.BrojMesta = kapacitet;
-                novaKabina.BrojKabine = labela;
-                noveKabine.Add(novaKabina);
-            }
             if(string.IsNullOrEmpty(slike[0]))
             {
                 imageError = "Morate upload-ovati barem 1 sliku!";
                 return Page();
             }
-
-            if (!validirajKruzer())
-                return RedirectToPage();
 
             string folderName = System.Guid.NewGuid().ToString();
             string fileName = "";
@@ -110,14 +95,28 @@ namespace PROJEKAT_MONGODB.Pages
             {
                 RedirectToPage("/Error?errorCode=" + fe);
             }
+
+            if (!validirajKruzer())
+                return RedirectToPage();
             await _dbKruzeri.InsertOneAsync(noviKruzer);
 
+            List<Kabina> noveKabine = new List<Kabina>();
+            foreach (string k in kabine)
+            {
+                Kabina novaKabina = new Kabina();
+                string labela = k.Substring(0, k.LastIndexOf('-'));
+                int kapacitet;
+                bool uspesno = Int32.TryParse(k.Substring(k.LastIndexOf('-') + 1), out kapacitet);
+                if (!uspesno) return RedirectToPage("/Error");
+                novaKabina.BrojMesta = kapacitet;
+                novaKabina.BrojKabine = labela;
+                noveKabine.Add(novaKabina);
+            }
             foreach (Kabina k in noveKabine)
             {
                 k.Kruzer = new MongoDBRef("kruzeri", noviKruzer.Id);
             }
             await _dbKabine.InsertManyAsync(noveKabine);
-
             var update = Builders<Kruzer>.Update.PushEach(Kruzer => Kruzer.Kabine, noveKabine.Select(kabina => new MongoDBRef("kabine", kabina.Id)));
             await _dbKruzeri.UpdateOneAsync(kruzer => kruzer.Id == noviKruzer.Id, update);
 

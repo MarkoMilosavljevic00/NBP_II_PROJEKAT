@@ -46,7 +46,7 @@ namespace PROJEKAT_MONGODB.Pages
             }
             ObjectId idHotela = new ObjectId(id);
             kruzer = kr.Find(x => x.Id.Equals(idHotela)).FirstOrDefault();
-            foreach (MongoDBRef pon in kruzer.Ponude.ToList())
+            foreach (MongoDBRef pon in kruzer.Krstarenja.ToList())
             {
                 ponude.Add(p.Find(x => x.Id.Equals(new ObjectId(pon.Id.ToString()))).FirstOrDefault());
             }

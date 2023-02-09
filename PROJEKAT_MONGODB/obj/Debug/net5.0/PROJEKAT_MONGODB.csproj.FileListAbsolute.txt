@@ -1867,7 +1867,6 @@ C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\staticwebassets\PRO
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.TagHelpers.input.cache
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.TagHelpers.output.cache
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.RazorCoreGenerate.cache
-C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\AddPonuda.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Admin.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\BookingForm.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Destinacije.cshtml.g.cs
@@ -1892,4 +1891,5 @@ C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.dl
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\ref\PROJEKAT_MONGODB.dll
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.pdb
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.genruntimeconfig.cache
-C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\DodavanjeKruzera.cshtml.g.cs
+C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\DodajKrstarenje.cshtml.g.cs
+C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\DodajKruzer.cshtml.g.cs

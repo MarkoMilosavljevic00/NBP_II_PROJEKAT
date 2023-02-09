@@ -71,16 +71,19 @@ namespace PROJEKAT_MONGODB.Pages
             {
                 kabine.Add(_dbKabine.Find(x => x.Id.Equals(new ObjectId(kabinaRef.Id.ToString()))).FirstOrDefault());
             }
-            List<Luka> pom = new List<Luka>();
             foreach (MongoDBRef krstarenjaRef in kruzer.Krstarenja.ToList())
             {
                 Krstarenje pomKrs = _dbKrstarenja.Find(x => x.Id.Equals(new ObjectId(krstarenjaRef.Id.ToString()))).FirstOrDefault();
                 krstarenja.Add(pomKrs);
-                foreach(MongoDBRef lukaRef in pomKrs.Luke.ToList())
+                if (pomKrs.Luke != null)
                 {
-                    pom.Add(_dbLuke.Find(x => x.Id.Equals(new ObjectId(lukaRef.Id.ToString()))).FirstOrDefault());
+                    List<Luka> pom = new List<Luka>();
+                    foreach (MongoDBRef lukaRef in pomKrs.Luke.ToList())
+                    {
+                        pom.Add(_dbLuke.Find(x => x.Id.Equals(new ObjectId(lukaRef.Id.ToString()))).FirstOrDefault());
+                    }
+                    luke.Add(pom);
                 }
-                luke.Add(pom);
             }
         }
 

@@ -66,12 +66,12 @@
                                         string nizLuka = "";
                                         for(int j=0; j<Model.luke[i].Count; j++)
                                         {
-                                            nizLuka = Model.luke[i][j].Naziv + '-' + Model.luke[i][j].Mesto;
+                                            nizLuka += Model.luke[i][j].Naziv + " -" + Model.luke[i][j].Mesto;
                                             if (Model.luke[i].Last() != Model.luke[i][j])
-                                                nizLuka += ',';
+                                                nizLuka += ", ";
                                         }
                                     <tr>
-                                        <td>@Model.krstarenja[i].Linija</td>
+                                        <td>@Model.krstarenja[i].Destinacija</td>
                                         <td>@nizLuka</td>
                                         <td>@Model.krstarenja[i].Pocetak.ToString("dd.MM.yyyy.")</td>
                                         <td>@Model.krstarenja[i].Kraj.ToString("dd.MM.yyyy.")</td>

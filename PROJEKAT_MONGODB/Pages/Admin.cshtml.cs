@@ -143,7 +143,7 @@ namespace PROJEKAT_MONGODB.Pages
                 ka.DeleteOne(filter2);
             }
             //brisanje aranzmana vezanih za hotel
-            foreach (MongoDBRef ponudaRef in kruzer.Ponude.ToList())
+            foreach (MongoDBRef ponudaRef in kruzer.Krstarenja.ToList())
             {
                 var filter3 = Builders<Krstarenje>.Filter.Eq("Id", ponudaRef.Id);
                 p.DeleteOne(filter3);
