@@ -1,0 +1,169 @@
+﻿@page
+@model PROJEKAT_MONGODB.Pages.KrstarenjePrikazModel
+@{
+}
+<head>
+    <title>eTourist | @Model.kruzer.Naziv</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css">
+</head>
+
+
+<section class="w3l-content-with-photo-11">
+    <div class="contentwithphoto-11 py-5">
+        <div class="container py-md-3">
+            <div class="row">
+
+                <div class="contentwithphoto-11-content col-lg-8" style="width:100%;">
+                    <div style="display:flex; flex-direction:column;">
+                        <h2>Informacije o krstarenju</h2>
+                    </div>
+                    <div class="work">
+                        <div class="column con-bottom  mt-5">
+                            <div class="con-bottom-left">
+                                <h4><b>@Model.krstarenje.Destinacija</b></h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column contentwithphoto-img" style="width:75%;">
+                        <div class="galleryContainer">
+                            <div class="gallery">
+                                <input type="radio" name="controls" id="c1" checked><img class="galleryImage" id="i1" src="@Model.krstarenje.Slike[0]" class="img-responsive" alt="">
+                                @for (int i = 1; i < Model.krstarenje.Slike.Count; i++)
+                                {
+                                    string radioId = "c" + (i + 1);
+                                    string imgId = "i" + (i + 1);
+                                    <input type="radio" name="controls" id="@radioId"><img class="galleryImage" id="@imgId" src="@Model.krstarenje.Slike[i]" class="img-responsive" alt="">
+                                }
+                            </div>
+                            <div class="thumbnails">
+                                @for (int i = 0; i < Model.krstarenje.Slike.Count; i++)
+                                {
+                                    string radioId = "c" + (i + 1);
+                                    <label class="thumbnailImage" for="@radioId"><img src="@Model.krstarenje.Slike[i]" class="img-responsive" alt=""></label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <div class="column con-bottom  mt-5">
+                            <div class="con-bottom-left">
+                                <h4><b>Linija</b></h4>
+                                <p>
+                                    @foreach (var luka in Model.luke)
+                                    {
+                                        string lukeStr = luka.Naziv + ", " + luka.Mesto;
+                                        if (Model.luke.Last() != luka)
+                                            lukeStr += " -";
+                                        <span>@lukeStr</span>
+                                    }
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <div class="column con-bottom  mt-5">
+                            <div class="con-bottom-left">
+                                <h4><b>O putovanju</b></h4>
+                                <p>@Model.krstarenje.Opis</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <div class="column con-bottom  mt-5">
+                            <div class="con-bottom-left">
+                                <h4><b>Detalji</b></h4>
+                                <ul class="mt-4">
+                                    <li><span class="title-text">Pocetak : </span> <span class="feature-count">@Model.krstarenje.Pocetak.ToString("dd.MM.yyyy.")</span></li>
+                                    <li><span class="title-text">Kraj : </span> <span class="feature-count">@Model.krstarenje.Kraj.ToString("dd.MM.yyyy.")</span></li>
+                                    <li><span class="title-text">Polazna luka : </span> <span class="feature-count">@Model.luke[0].Naziv , @Model.luke[0].Mesto</span></li>
+                                    <li><span class="title-text">Cena : </span> <span class="feature-count">@Model.krstarenje.Cena eura</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><hr><br>
+            <div class="row">
+                <div class="contentwithphoto-11-content col-lg-8" style="width:100%;">
+                    <div style="display:flex; flex-direction:column;">
+                        <h2>Informacije o kruzeru</h2>
+                    </div>
+                    <div class="work">
+                        <div class="column con-bottom  mt-5">
+                            <div class="con-bottom-left" style="display:inline">
+                                <h4 style="display:inline"><b>@Model.kruzer.Naziv</b></h4>
+                                @for (int i = 0; i < @Model.kruzer.BrojZvezdica; i++)
+                                {
+                                    <span class="fa fa-star checked" style="color:orange; margin-left:5px; margin-top:15px;"></span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column contentwithphoto-img" style="width:75%;">
+                        <div class="galleryContainer">
+                            <div class="gallery">
+                                <input type="radio" name="controls1" id="c11" checked><img class="galleryImage" id="i11" src="@Model.kruzer.Slike[0]" class="img-responsive" alt="">
+                                @for (int i = 1; i < Model.kruzer.Slike.Count; i++)
+                                {
+                                    string radioId = "c1" + (i + 1);
+                                    string imgId = "i1" + (i + 1);
+                                    <input type="radio" name="controls1" id="@radioId"><img class="galleryImage" id="@imgId" src="@Model.kruzer.Slike[i]" class="img-responsive" alt="">
+                                }
+                            </div>
+                            <div class="thumbnails">
+                                @for (int i = 0; i < Model.kruzer.Slike.Count; i++)
+                                {
+                                    string radioId = "c1" + (i + 1);
+                                    <label class="thumbnailImage" for="@radioId"><img src="@Model.kruzer.Slike[i]" class="img-responsive" alt=""></label>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <div class="column con-bottom  mt-5">
+                            <div class="con-bottom-left">
+                                <h4><b>O kruzeru</b></h4>
+                                <p>
+                                    @Model.kruzer.Opis
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="work">
+                        <div class="column con-bottom  mt-5">
+                            <div class="con-bottom-left">
+                                <h4><b>Detalji</b></h4>
+                                <ul class="mt-4">
+                                    <li><span class="title-text">Kapetan : </span> <span class="feature-count">@Model.kruzer.Kapetan</span></li>
+                                    <li>
+                                        <span class="title-text">Rejting : </span>
+                                        <span class="feature-count">
+                                            @for (int i = 0; i < @Model.kruzer.BrojZvezdica; i++)
+                                            {
+                                                <span class="fa fa-star checked" style="color:orange; margin-left:5px; margin-top:15px;"></span>
+                                            }
+                                        </span>
+                                    </li>
+                                    <li><span class="title-text">Kontakt telefon : </span> <span class="feature-count">@Model.kruzer.BrojTelefona</span></li>
+                                    <li><span class="title-text">Broj kabina : </span> <span class="feature-count">@Model.kabine.Count</span></li>
+                                    <li><span class="title-text">Ukupan kapacitet : </span> <span class="feature-count">@Model.kabine.Aggregate(0, (acc, x) => acc + x.BrojMesta)</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="
+                display: flex;
+                justify-content: right;
+                ">
+                <button class="btn-theme1" style="height: 75px;width: 200px;">Rezervisi</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="js/map.js"></script>

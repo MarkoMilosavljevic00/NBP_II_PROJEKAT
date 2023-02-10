@@ -23,10 +23,10 @@
                           if (info.Destinacija == destinacija)
                           {
                               <div class="float-top col-lg-4 col-md-6">
-                                  <a asp-route-krstarenjeId="@info.KrstarenjeId" asp-route-kruzerId="@info.KrstarenjeId" asp-page="/KrstarenjePrikaz"><img src="@info.GlavnaSlika" class="img-responsive" alt=""></a>
+                                  <a asp-route-krstarenjeId="@info.KrstarenjeId" asp-route-kruzerId="@info.KruzerId" asp-page="/KrstarenjePrikaz"><img src="@info.GlavnaSlika" class="img-responsive" alt=""></a>
                                   <div class="float-lt feature-gd">
                                       <p> @info.Luke</p>
-                                      <h3><a asp-route-krstarenjeId="@info.KrstarenjeId" asp-route-kruzerId="@info.KrstarenjeId" asp-page="/KrstarenjePrikaz">@info.NazivKruzera</a> </h3>
+                                      <h3><a asp-route-krstarenjeId="@info.KrstarenjeId" asp-route-kruzerId="@info.KruzerId" asp-page="/KrstarenjePrikaz">@info.NazivKruzera</a> </h3>
                                       <p>
                                           @for (int i = 0; i < @info.RejtingKruzera; i++)
                                           {

@@ -1873,7 +1873,6 @@ C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Error.c
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Kontakt.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Kruzeri.cshtml.g.cs
-C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\KruzerSingle.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\ONama.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Prijava.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Privacy.cshtml.g.cs
@@ -1893,3 +1892,4 @@ C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.ge
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\DodajKrstarenje.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\DodajKruzer.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Katalog.cshtml.g.cs
+C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\KrstarenjePrikaz.cshtml.g.cs

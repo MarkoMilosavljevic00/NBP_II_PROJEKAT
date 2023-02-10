@@ -10,8 +10,8 @@ namespace PROJEKAT_MONGODB.Model
     {
         public ObjectId Id { get; set; }
         public string BrojKabine { get; set; }
-        public List<MongoDBRef> Rezervacije { get; set; } = new List<MongoDBRef>();
         public int BrojMesta { get; set; }
+        public List<MongoDBRef> Rezervacije { get; set; } = new List<MongoDBRef>();
         public MongoDBRef Kruzer { get; set; }
     }
 }

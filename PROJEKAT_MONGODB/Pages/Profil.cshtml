@@ -19,7 +19,7 @@
                             <option value="0">Room</option>
                             @for (int i = 0; i < @Model.kabine.Count; i++)
                             {
-                                <option value="@Model.kabine.ElementAt(i).BrojKabine">@Model.kabine.ElementAt(i).BrojKabine (@Model.kabine.ElementAt(i).BrojMesta)</option>
+                                <option value="@Model.kabine.ElementAt(i).BrojKabine">@Model.kabine.ElementAt(i).BrojKabine (@Model.kabine.ElementAt(i).BrojKabine)</option>
                             }
                         </select>
                         <button type="submit" onclick="vratiRez()">See availability</button>
@@ -61,22 +61,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for (int i=0; i<Model.krstarenja.Count; i++)
+                                    @for (int i = 0; i < Model.krstarenja.Count; i++)
                                     {
                                         string nizLuka = "";
-                                        for(int j=0; j<Model.luke[i].Count; j++)
+                                        for (int j = 0; j < Model.luke[i].Count; j++)
                                         {
                                             nizLuka += Model.luke[i][j].Naziv + " -" + Model.luke[i][j].Mesto;
                                             if (Model.luke[i].Last() != Model.luke[i][j])
                                                 nizLuka += ", ";
                                         }
-                                    <tr>
-                                        <td>@Model.krstarenja[i].Destinacija</td>
-                                        <td>@nizLuka</td>
-                                        <td>@Model.krstarenja[i].Pocetak.ToString("dd.MM.yyyy.")</td>
-                                        <td>@Model.krstarenja[i].Kraj.ToString("dd.MM.yyyy.")</td>
-                                        <td>@Model.krstarenja[i].Cena</td>
-                                    </tr>
+                                        <tr>
+                                            <td>@Model.krstarenja[i].Destinacija</td>
+                                            <td>@nizLuka</td>
+                                            <td>@Model.krstarenja[i].Pocetak.ToString("dd.MM.yyyy.")</td>
+                                            <td>@Model.krstarenja[i].Kraj.ToString("dd.MM.yyyy.")</td>
+                                            <td>@Model.krstarenja[i].Cena</td>
+                                        </tr>
                                     }
                                 </tbody>
                             </table>
@@ -139,7 +139,6 @@
         var soba = document.getElementById('sobaOznaka').value;
         console.log(1);
         console.log(soba)
-
         $.ajax({
             type: "GET",
             url: '/Profil?handler=Kabina',
@@ -175,4 +174,5 @@
 </script>
 <script src="https://code.jquery.com/jquery-2.2.4.min.js"
         integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-        crossorigin="anonymous"></script>
+        crossorigin="anonymous">
+</script>
