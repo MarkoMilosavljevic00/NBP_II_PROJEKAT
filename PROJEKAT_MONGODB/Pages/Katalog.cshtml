@@ -1,0 +1,48 @@
+﻿@page
+@model PROJEKAT_MONGODB.Pages.KatalogModel
+@{ }
+
+<!-- //covers -->
+<!---728x90--->
+
+<section class="w3l-features-8">
+    <!-- /features -->
+    <div class="features py-5" id="services">
+        <div class="container py-md-3">
+
+            @foreach (var destinacija in Model.listaDestinacija)
+            {
+                <div class="heading text-center mx-auto">
+                    <h3 class="head">@destinacija</h3>
+                </div>
+
+                <div class="fea-gd-vv text-center row mt-5 pt-3" style="padding-bottom: 3rem">
+
+                    @foreach (var info in Model.listaKrstarenjaInfo)
+                    {
+                          if (info.Destinacija == destinacija)
+                          {
+                              <div class="float-top col-lg-4 col-md-6">
+                                  <a asp-route-krstarenjeId="@info.KrstarenjeId" asp-route-kruzerId="@info.KrstarenjeId" asp-page="/KrstarenjePrikaz"><img src="@info.GlavnaSlika" class="img-responsive" alt=""></a>
+                                  <div class="float-lt feature-gd">
+                                      <p> @info.Luke</p>
+                                      <h3><a asp-route-krstarenjeId="@info.KrstarenjeId" asp-route-kruzerId="@info.KrstarenjeId" asp-page="/KrstarenjePrikaz">@info.NazivKruzera</a> </h3>
+                                      <p>
+                                          @for (int i = 0; i < @info.RejtingKruzera; i++)
+                                          {
+                                              <span class="fa fa-star checked" style="color:orange;"></span>
+                                          }
+                                      </p>
+                                      <p> @info.Opis</p>
+                                  </div>
+                              </div>
+                          }
+                    }
+                </div>
+            }
+
+        </div>
+    </div>
+    <!-- //features -->
+</section>
+<!---728x90--->
