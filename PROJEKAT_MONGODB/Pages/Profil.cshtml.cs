@@ -108,7 +108,7 @@ namespace PROJEKAT_MONGODB.Pages
             }
             foreach (Rezervacija Rez in rez)
             {
-                ar.Add(_dbKrstarenja.Find(x => x.Id.Equals(new ObjectId(Rez.Ponuda.Id.ToString()))).FirstOrDefault());
+                //ar.Add(_dbKrstarenja.Find(x => x.Id.Equals(new ObjectId(Rez.Ponuda.Id.ToString()))).FirstOrDefault());
             }
 
             List<string> datum = new List<string>();
@@ -118,7 +118,7 @@ namespace PROJEKAT_MONGODB.Pages
             for (int i = 0; i < rez.Count; i++)
             {
                 datum.Add(rez.ElementAt(i).DatumKreiranja.ToString("dd.MM.yyyy."));
-                status.Add(rez.ElementAt(i).Status);
+                //status.Add(rez.ElementAt(i).Status);
                 pocetak.Add(ar.ElementAt(i).Pocetak.ToString("dd.MM.yyyy."));
                 kraj.Add(ar.ElementAt(i).Kraj.ToString("dd.MM.yyyy."));
             }

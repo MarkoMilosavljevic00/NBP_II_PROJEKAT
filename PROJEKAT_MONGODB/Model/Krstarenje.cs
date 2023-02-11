@@ -17,7 +17,7 @@ namespace PROJEKAT_MONGODB.Model
         public List<string> Slike { get; set; } = new List<string>();
         public string Opis { get; set; }
         public List<MongoDBRef> Luke { get; set; } = new List<MongoDBRef>();
-        //public List<MongoDBRef> Rezervacije { get; set; } = new List<MongoDBRef>();
+        public List<MongoDBRef> Rezervacije { get; set; } = new List<MongoDBRef>();
         public MongoDBRef Kruzer { get; set; }
     }
 }

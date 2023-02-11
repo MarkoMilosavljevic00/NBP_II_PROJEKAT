@@ -26,14 +26,15 @@
                 <div class="heading text-center mx-auto">
                     <h3 class="head">Rezervacija</h3>
                     <p class="my-3 head">
-                        Unos informacija za krstarenje na brodu
-                        <bold>@Model.kruzer.Naziv na destinaciji @Model.Krsta</bold>
+                        Rezervacija mesta na brodu 
+                        <bold>@Model.kruzer.Naziv na destinaciji @Model.krstarenje.Destinacija</bold>
                         <br>
-                        From
+                        Za datume:
+                        od
                         <bold>@Model.krstarenje.Pocetak.ToShortDateString()</bold>
-                        to
+                        do
                         <bold>@Model.krstarenje.Kraj.ToShortDateString()</bold>
-                        for
+                        za
                         <bold>@Model.krstarenje.Cena </bold>&#8364
                     </p>
                 </div>
@@ -43,27 +44,37 @@
                     <input type="hidden" asp-for="@Model.kruzerId">
                     <div class="form-one">
                         <div class="form-input">
-                            <label>First Name:</label>
-                            <input type="text" asp-for="@Model.ime" placeholder="Enter your first name.." required />
+                            <label>Ime :</label>
+                            <input type="text" asp-for="@Model.ime" placeholder="Unesite ime..." required />
                         </div>
                         <div class="form-input">
-                            <label>Last Name:</label>
-                            <input type="text" asp-for="@Model.prezime" placeholder="Enter your last name.." required>
+                            <label>Prezime :</label>
+                            <input type="text" asp-for="@Model.prezime" placeholder="Unesite prezime..." required>
                         </div>
                         <div class="form-input">
-                            <label>Passport no:</label>
-                            <input type="number" id="passport" asp-for="@Model.brojPasosa" placeholder="Enter your passport number.." required />
+                            <label>Broj pasosa :</label>
+                            <input type="text" id="passport" asp-for="@Model.brojPasosa" placeholder="Unesite broj pasosa..." required />
                         </div>
                         <div class="form-input">
-                            <label>Phone Number:</label>
-                            <input type="text" asp-for="@Model.brTelefona" placeholder="Phone.." required />
+                            <label>Email Adresa :</label>
+                            <input type="text" asp-for="@Model.email" placeholder="Unesite email..." required />
                         </div>
 
                         <div class="form-input">
-                            <label> No. of beds</label>
-                            <select asp-for="brojMesta" asp-items="@Model.kapacitet">
-                                <option value="">Select capacity</option>
-                            </select>
+                            <label> Izaberite neku od dostupnih kabina: </label>
+                            @if (Model.dostupneKabineSelect.Count() > 0)
+                            {
+                                <select asp-for="idKabine">
+                                    <option value="">Kabine:</option>
+                                    @foreach(var kabina in Model.dostupneKabine) {
+                                         <option value="@kabina.Id">@kabina.BrojKabine - @kabina.BrojMesta</option>
+                                    }
+                                </select>
+                            }
+                            else
+                            {
+                                <label>Nazalost nema vise slobodnih kabina.</label>
+                            }
                         </div>
 
 

@@ -79,7 +79,7 @@ namespace PROJEKAT_MONGODB.Pages
             ponude = p.Find(x => true).ToList();
             foreach (Rezervacija rez in rezervacije)
             {
-                ponudeRezervacija.Add(p.Find(x => x.Id.Equals(new ObjectId(rez.Ponuda.Id.ToString()))).FirstOrDefault());
+                //ponudeRezervacija.Add(p.Find(x => x.Id.Equals(new ObjectId(rez.Ponuda.Id.ToString()))).FirstOrDefault());
                 kruzeriRezervacija.Add(kr.Find(x => x.Id.Equals( new ObjectId(rez.Kruzer.Id.ToString()))).FirstOrDefault());
             }
             foreach (Kruzer kruzer in kruzeriRezervacija)

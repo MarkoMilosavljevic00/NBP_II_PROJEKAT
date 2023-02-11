@@ -1868,7 +1868,6 @@ C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.Ta
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.TagHelpers.output.cache
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\PROJEKAT_MONGODB.RazorCoreGenerate.cache
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Admin.cshtml.g.cs
-C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\BookingForm.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Kontakt.cshtml.g.cs
@@ -1893,3 +1892,4 @@ C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\DodajKr
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\DodajKruzer.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Katalog.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\KrstarenjePrikaz.cshtml.g.cs
+C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Rezervacija.cshtml.g.cs

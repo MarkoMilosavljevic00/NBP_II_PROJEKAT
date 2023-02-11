@@ -45,9 +45,9 @@
                                         @for (int i = 0; i < @Model.rezervacije.Count; i++)
                                         {
                                             <tr>
-                                                <td>@Model.rezervacije.ElementAt(i).ImeKorisnika</td>
-                                                <td>@Model.rezervacije.ElementAt(i).PrezimeKorisnika</td>
-                                                <td>@Model.rezervacije.ElementAt(i).BrojTelefonaKorisnika</td>
+                                                <td>@Model.rezervacije.ElementAt(i).Ime</td>
+                                                <td>@Model.rezervacije.ElementAt(i).Prezime</td>
+                                                <td>@Model.rezervacije.ElementAt(i).Email</td>
                                                 <td>@Model.rezervacije.ElementAt(i).DatumKreiranja.ToString("dd.MM.yyyy.")</td>
                                                 <td><a asp-page="/KruzerSingle" asp-route-id="@Model.kruzeriRezervacija.ElementAt(i).Id">@Model.kruzeriRezervacija.ElementAt(i).Naziv</a></td>
                                                 <td>@Model.kruzeriRezervacija.ElementAt(i).BrojTelefona</td>
@@ -58,10 +58,10 @@
                                                 <td>@Model.ponudeRezervacija.ElementAt(i).Cena</td>
                                                 <td>@Model.rezervacije.ElementAt(i).Status</td>
                                                 <td><button class="otkaziRez" asp-route-id="@Model.rezervacije.ElementAt(i).Id" asp-page-handler="ObrisiRez" onclick="return confirm('Da li ste sigurni da zelite da obrisete ovu rezervaciju?');">Delete</button></td>
-                                                @if (Model.rezervacije.ElementAt(i).Status == "Na cekanju!")
+                                                @*@if (Model.rezervacije.ElementAt(i).Status == "Na cekanju!")
                                                 {
                                                     <td><button class="otkaziRez" asp-route-id="@Model.rezervacije.ElementAt(i).Id" asp-page-handler="StatusAktivno" onclick="return confirm('Da li ste sigurni da zelite da promenite status na Aktivno?');">Aktivno</button></td>
-}
+}*@
                                             </tr>
                                         }
                                     </tbody>
