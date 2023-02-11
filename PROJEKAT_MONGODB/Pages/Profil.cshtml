@@ -53,7 +53,8 @@
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
                                     <tr>
-                                        <th>Linija</th>
+                                        <th></th>
+                                        <th>Destinacija</th>
                                         <th>Luke</th>
                                         <th>Pocetak</th>
                                         <th>Kraj</th>
@@ -71,6 +72,7 @@
                                                 nizLuka += ", ";
                                         }
                                         <tr>
+                                            <td><a asp-route-krstarenjeId="@Model.krstarenja[i].Id" asp-route-kruzerId="@Model.krstarenja[i].Kruzer.Id" asp-page="/KrstarenjePrikaz"><img src="@Model.krstarenja[i].Slike[0]" class="img-responsive" alt=""></a></td>
                                             <td>@Model.krstarenja[i].Destinacija</td>
                                             <td>@nizLuka</td>
                                             <td>@Model.krstarenja[i].Pocetak.ToString("dd.MM.yyyy.")</td>

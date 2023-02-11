@@ -7,13 +7,19 @@ using MongoDB.Driver;
 
 namespace PROJEKAT_MONGODB.Model
 {
+    public enum StatusRezervacije
+    {
+        Cekanje,
+        Prihvaceno,
+        Odbijeno
+    }
     public class Rezervacija
     {
         public ObjectId Id { get; set; }
         public DateTime DatumKreiranja { get; set; }
         public string Status { get; set; } = "Na cekanju!";
-        public MongoDBRef Ponuda { get; set; }
-        public MongoDBRef Kruzer { get; set; }
+        public MongoDBRef Krstarenje { get; set; }
+        public MongoDBRef Soba { get; set; }
         public string ImeKorisnika { get; set; }
         public string PrezimeKorisnika { get; set; }
         public string BrojPasosaKorisnika { get; set; }

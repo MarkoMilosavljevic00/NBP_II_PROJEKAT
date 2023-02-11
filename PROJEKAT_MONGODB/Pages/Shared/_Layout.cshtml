@@ -205,29 +205,29 @@ full_image_server_id,full_image from template_down_details where starter_demo_ur
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" asp-page="/Index">Pocetna</a>
+                            <a class="nav-link" asp-page="/Index"><span class="fa fa-home" aria-hidden="true"></span> Pocetna</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/Katalog">Katalog</a>
+                            <a class="nav-link" asp-page="/Katalog"><span class="fa fa-ship" aria-hidden="true"></span> Katalog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-page="/ONama">O Nama</a>
+                            <a class="nav-link" asp-page="/ONama"><span class="fa fa-group" aria-hidden="true"></span> O Nama</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" onclick="scrollDown()">Kontakt</a>
+                            <a class="nav-link" onclick="scrollDown()"><span class="fa fa-phone" aria-hidden="true"></span> Kontakt</a>
                         </li>
                         @if (Model.Message != null)
                         {
                             if (Model.Message == "Admin")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-page="/Admin">Profil</a>
+                                    <a class="nav-link" asp-page="/Admin"><span class="fa fa-user" aria-hidden="true"></span> Admin</a>
                                 </li>
                             }
                             if (Model.Message == "Menadzer")
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-page="/Profil">Profil</a>
+                                    <a class="nav-link" asp-page="/Profil"> <span class="fa fa-user" aria-hidden="true"></span> Profil</a>
                                 </li>
                             }
                         }
@@ -235,12 +235,12 @@ full_image_server_id,full_image from template_down_details where starter_demo_ur
                     <!--<form class="form-inline">-->
                     @if (Model.Message == null)
                     {
-                        <a class="btn btn-primary btn-theme" asp-page="/Prijava">Prijavi se</a>
-                        <a class="btn btn-primary btn-theme" asp-page="/Registracija">Registruj se</a>
+                        <a class="btn btn-primary btn-theme" asp-page="/Prijava"><span class="fa fa-sign-in" aria-hidden="true"></span> Prijavi se</a>
+                        <a class="btn btn-primary btn-theme" asp-page="/Registracija"><span class="fa fa-plus-square" aria-hidden="true"></span> Registruj se</a>
                     }
                     else
                     {
-                        <a class="btn btn-secondary btn-theme" asp-page="/Index" asp-page-handler="Logout">Odjavi se</a>
+                        <a class="btn btn-primary btn-theme" asp-page="/Index" asp-page-handler="Logout"><span class="fa fa-sign-out" aria-hidden="true"></span> Odjavi se</a>
                     }
                     <!--</form> -->
                 </div>

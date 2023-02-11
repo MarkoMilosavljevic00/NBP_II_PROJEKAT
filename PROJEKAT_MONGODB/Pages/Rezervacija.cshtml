@@ -1,5 +1,5 @@
 ﻿@page
-@model PROJEKAT_MONGODB.Pages.BookingFormModel
+@model PROJEKAT_MONGODB.Pages.RezervacijaModel
 @{
 }
 <section class="w3l-inner-banner-main">
@@ -24,23 +24,23 @@
         <div class="donate-form section-gap py-5">
             <div class="container py-md-3">
                 <div class="heading text-center mx-auto">
-                    <h3 class="head">Create reservation</h3>
+                    <h3 class="head">Rezervacija</h3>
                     <p class="my-3 head">
-                        Insert personal informations to create reservation at
-                        <bold>@Model.Kruzer.Naziv in @Model.Kruzer.Gradovi , @Model.Kruzer.Drzave</bold>
+                        Unos informacija za krstarenje na brodu
+                        <bold>@Model.kruzer.Naziv na destinaciji @Model.Krsta</bold>
                         <br>
                         From
-                        <bold>@Model.ponuda.Pocetak.ToShortDateString()</bold>
+                        <bold>@Model.krstarenje.Pocetak.ToShortDateString()</bold>
                         to
-                        <bold>@Model.ponuda.Kraj.ToShortDateString()</bold>
+                        <bold>@Model.krstarenje.Kraj.ToShortDateString()</bold>
                         for
-                        <bold>@Model.ponuda.Cena </bold>&#8364
+                        <bold>@Model.krstarenje.Cena </bold>&#8364
                     </p>
                 </div>
                 <form method="post" class="signin-form donate-form mt-5 pt-3">
 
-                    <input type="hidden" asp-for="@Model.ponudaId">
-                    <input type="hidden" asp-for="@Model.KruzerId">
+                    <input type="hidden" asp-for="@Model.krstarenjeId">
+                    <input type="hidden" asp-for="@Model.kruzerId">
                     <div class="form-one">
                         <div class="form-input">
                             <label>First Name:</label>
@@ -48,7 +48,7 @@
                         </div>
                         <div class="form-input">
                             <label>Last Name:</label>
-                            <input type="text" asp-for="@Model.Prezime" placeholder="Enter your last name.." required>
+                            <input type="text" asp-for="@Model.prezime" placeholder="Enter your last name.." required>
                         </div>
                         <div class="form-input">
                             <label>Passport no:</label>
