@@ -69,7 +69,7 @@
         <label class="error" style="margin-bottom: 0px">@Model.imageError</label>
     </span>
     <br><br><br><br>
-    <button class="btn type=" submit" button-eff">Dodaj</button>
+    
     <input type="text" asp-for="slike[0]" style="display: none;" id="img-src-glavna" value="">
     <input type="text" asp-for="slike[1]" style="display: none;" id="img-src-1" value="">
     <input type="text" asp-for="slike[2]" style="display: none;" id="img-src-2" value="">
@@ -85,6 +85,7 @@
             </span>
             <button type="button" onclick="dodajLuku(this)">Dodaj luku</button>
         </span>
+        <button class="btn button-eff" type="submit">Dodaj</button>
 
 
         <br>

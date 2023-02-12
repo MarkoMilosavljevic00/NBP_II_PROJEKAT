@@ -3,13 +3,14 @@
 @{
 }
 <section class="w3l-inner-banner-main">
-    <div class="about-inner sear-1">
+    <div class="about-inner portfolo-1">
         <div class="container">
-
             <ul class="breadcrumbs-custom-path">
-
-                <li><a href="index-2.html"><span class="fa fa-home" aria-hidden="true"></span> <span class="fa fa-angle-double-right" aria-hidden="true"></span></a></li>
-                <li class="active">Booking</li>
+                <li><a asp-page="/Index"><span class="fa fa-home" aria-hidden="true"></span> </a></li>
+                <li class="active"><a asp-page="/Katalog">Katalog / </a> </li>
+                <li class="active">@Model.krstarenje.Destinacija / </li>
+                <li class="active">@Model.kruzer.Naziv /</li>
+                <li class="active">Rezervacija</li>
             </ul>
         </div>
     </div>
@@ -62,14 +63,16 @@
 
                         <div class="form-input">
                             <label> Izaberite neku od dostupnih kabina: </label>
-                            @if (Model.dostupneKabineSelect.Count() > 0)
+                            @if (Model.dostupneKabine.Count() > 0)
                             {
                                 <select asp-for="idKabine">
                                     <option value="">Kabine:</option>
-                                    @foreach(var kabina in Model.dostupneKabine) {
-                                         <option value="@kabina.Id">@kabina.BrojKabine - @kabina.BrojMesta</option>
+                                    @foreach (var kabina in Model.dostupneKabine)
+                                    {
+                                        <option value="@kabina.Id">@kabina.BrojKabine - @kabina.BrojMesta</option>
                                     }
                                 </select>
+                                <button class="btn button-eff">Book Now</button>
                             }
                             else
                             {
@@ -80,7 +83,7 @@
 
                     </div>
 
-                    <button class="btn button-eff">Book Now</button>
+                    
                 </form>
             </div>
         </div>

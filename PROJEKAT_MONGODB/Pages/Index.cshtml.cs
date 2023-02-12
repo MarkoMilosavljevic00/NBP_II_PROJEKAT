@@ -13,21 +13,11 @@ namespace PROJEKAT_MONGODB.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        //public IndexModel(ILogger<IndexModel> logger)
-        //{
-        //    _logger = logger;
-        //}
-
-        public List<Kruzer> topRated { get; set; }
-        public string Message { get; set; }
-
-
         private readonly IMongoCollection<Kruzer> _dbKruzeri;
         private readonly IMongoCollection<Korisnik> _dbKorisnici;
-        private readonly IMongoCollection<Drzava> _dbDrzave;
-
+        private readonly IMongoCollection<Krstarenje> _dbKrstarenja;
+        public List<Krstarenje> krstarenjaZaPrikaz { get; set; }
+        public string Message { get; set; }
 
         public IndexModel(IDatabaseSettings settings)
         {
@@ -37,12 +27,12 @@ namespace PROJEKAT_MONGODB.Pages
             var database = client.GetDatabase("SEVENSEAS");
             _dbKruzeri = database.GetCollection<Kruzer>("kruzeri");
             _dbKorisnici = database.GetCollection<Korisnik>("korisnici");
-            _dbDrzave = database.GetCollection<Drzava>("drzave");
+            _dbKrstarenja = database.GetCollection<Krstarenje>("krstarenja");
         }
 
         public void OnGet()
         {
-            topRated = _dbKruzeri.AsQueryable<Kruzer>().OrderByDescending(Hotel => Hotel.BrojZvezdica).Take(4).ToList();
+            krstarenjaZaPrikaz = _dbKrstarenja.AsQueryable<Krstarenje>().Take(6).ToList();
 
 
 
@@ -56,9 +46,10 @@ namespace PROJEKAT_MONGODB.Pages
             }
 
         }
+
         public IActionResult OnGetLogout()
         {
-            HttpContext.Session.Remove("email");
+            HttpContext.Session.Remove("Email");
             Message = null;
             return RedirectToPage("/Index");
             //<a asp-page="/Index" asp-page-handler="Logout">Logout</a>

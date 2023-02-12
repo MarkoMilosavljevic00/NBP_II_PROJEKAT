@@ -11,14 +11,11 @@ namespace PROJEKAT_MONGODB.Model
     {
         public ObjectId Id { get; set; }
         public string Naziv { get; set; }
-        public List<Drzava> Drzave { get; set; } = new List<Drzava>();
-        public List<Luka> Gradovi { get; set; } = new List<Luka>();
         public string Kapetan { get; set; }
         public string BrojTelefona { get; set; }
         public int BrojZvezdica { get; set; }//https://kvi.travel/travel-tips/cruise-ship-ratings/ od 1 do 6 se krecu ratinzi
         public string Opis { get; set; }
         public List<string> Slike { get; set; } = new List<string>();
-        public List<MongoDBRef> Ponude { get; set; } = new List<MongoDBRef>();
         public List<MongoDBRef> Krstarenja { get; set; } = new List<MongoDBRef>();
         public List<MongoDBRef> Kabine { get; set; } = new List<MongoDBRef>();
     }

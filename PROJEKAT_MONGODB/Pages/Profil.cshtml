@@ -7,33 +7,77 @@
         <div class="container py-md-3">
             <div style="margin-bottom:10px;" class="tabelaRez-info">
                 <div class="tab">
-                    <button class="tablinks" onclick="openTable(event, 'Reservations')">Reservations</button>
-                    <button class="tablinks" onclick="openTable(event, 'Krstarenja')">Krstarenja</button>
-                    <button class="tablinks" onclick="openTable(event, 'Rooms')">Rooms</button>
+                    <button class="tablinks" onclick="otvoriTabelu(event, 'Kruzer')">Kruzer</button>
+                    <button class="tablinks" onclick="otvoriTabelu(event, 'Krstarenja')">Krstarenja</button>
+                    <button class="tablinks" onclick="otvoriTabelu(event, 'Rezervacije')">Zahtevi za rezervacije</button>
                 </div>
 
-                <div id="Reservations" class="tabcontent">
-                    <h4 class="predstojece-rez">Reservations</h4>
+                <div id="Rezervacije" class="tabcontent">
+                    <h4 class="predstojece-rez">Zahtevi za rezervacije</h4>
                     <div>
-                        <select id="sobaOznaka">
-                            <option value="0">Room</option>
-                            @for (int i = 0; i < @Model.kabine.Count; i++)
-                            {
-                                <option value="@Model.kabine.ElementAt(i).BrojKabine">@Model.kabine.ElementAt(i).BrojKabine (@Model.kabine.ElementAt(i).BrojKabine)</option>
-                            }
-                        </select>
-                        <button type="submit" onclick="vratiRez()">See availability</button>
+                        @*<select id="kabinaOznaka">
+                                <option value="0">Kabine</option>
+                                @for (int i = 0; i < @Model.kabine.Count; i++)
+                                {
+                                    <option value="@Model.kabine[i].BrojKabine">@Model.kabine[i].BrojKabine - @Model.kabine[i].BrojMesta</option>
+                                }
+                            </select>
+                            <button type="submit" onclick="vratiRez()">Prikazi rezervacije</button>*@
                         <div style="overflow-y:scroll; height:500px; margin-top:20px;">
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
                                     <tr>
-                                        <th>Date of reservation</th>
+                                        <th>Krstarenje</th>
+                                        <th>Ime</th>
+                                        <th>Prezime</th>
+                                        <th>Email</th>
+                                        <th>Broj Pasosa</th>
+                                        <th>Datum zahteva</th>
+                                        <th>Polazak</th>
+                                        <th>Kraj</th>
                                         <th>Status</th>
-                                        <th>Start date</th>
-                                        <th>End date</th>
+                                        <th>Odbij</th>
+                                        <th>Prihvati</th>
                                     </tr>
                                 </thead>
-                                <tbody id="soba">
+                                <tbody>
+                                    @for (int i = 0; i < @Model.rezervacije.Count; i++)
+                                    {
+                                    <tr>
+                                        <td>@Model.rezervisanaKrstarenja[i].Destinacija</td>
+                                        <td>@Model.rezervacije[i].Ime</td>
+                                        <td>@Model.rezervacije[i].Prezime</td>
+                                        <td>@Model.rezervacije[i].Email</td>
+                                        <td>@Model.rezervacije[i].BrojPasosa</td>
+                                        <td>@Model.rezervacije[i].DatumKreiranja.ToString("dd.MM.yyyy.")</td>
+                                        <td>@Model.rezervacije[i].Pocetak.ToString("dd.MM.yyyy.")</td>
+                                        <td>@Model.rezervacije[i].Kraj.ToString("dd.MM.yyyy.")</td>
+                                        <td>@Model.rezervacije[i].Status</td>
+                                        @if (Model.rezervacije.ElementAt(i).Status == PROJEKAT_MONGODB.Model.StatusRezervacije.Cekanje)
+                                        {
+                                            <td>
+                                                <form method="post">
+                                                    <button type="submit" class="btn btn-theme1" asp-route-rezervacijaid="@Model.rezervacije[i].Id" asp-page-handler="Prihvati">Prihvati</button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <form method="post">
+                                                    <button type="submit" class="btn btn-theme1" asp-route-rezervacijaid="@Model.rezervacije[i].Id" asp-page-handler="Odbij">Odbij</button>
+                                                </form>
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>
+                                            </td>
+                                            <td>
+                                                <form method="post">
+                                                    <button type="submit" class="btn btn-theme1" asp-route-rezervacijaid="@Model.rezervacije[i].Id" asp-page-handler="Odbij">Otkazi</button>
+                                                </form>
+                                            </td>
+                                        }
+                                    </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>
@@ -86,11 +130,11 @@
                     }
                 </div>
 
-                <div id="Rooms" class="tabcontent">
-                    <h4 class="predstojece-rez">Rooms</h4>
+                <div id="Kruzer" class="tabcontent">
+                    <h4 class="predstojece-rez">Kabine</h4>
                     @if (Model.kabine.Count == 0)
                     {
-                        <label class="nema-rez">There are no rooms!</label>
+                        <label class="nema-rez">Nemate kabine na krzueru!</label>
                     }
                     else
                     {
@@ -98,16 +142,16 @@
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Num. of beds</th>
+                                        <th>Tip</th>
+                                        <th>Kapacitet</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (var s in @Model.kabine)
+                                    @foreach (var k in @Model.kabine)
                                     {
                                         <tr>
-                                            <td>@s.BrojKabine</td>
-                                            <td>@s.BrojMesta</td>
+                                            <td>@k.BrojKabine</td>
+                                            <td>@k.BrojMesta</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -121,7 +165,7 @@
 </section>
 
 <script>
-    function openTable(evt, cityName) {
+    function otvoriTabelu(evt, idTabele) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabcontent");
         for (i = 0; i < tabcontent.length; i++) {
@@ -131,16 +175,14 @@
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
-        document.getElementById(cityName).style.display = "block";
+        document.getElementById(idTabele).style.display = "block";
         evt.currentTarget.className += " active";
     }
 </script>
 
 <script>
     function vratiRez() {
-        var soba = document.getElementById('sobaOznaka').value;
-        console.log(1);
-        console.log(soba)
+        var kabina = document.getElementById('kabinaOznaka').value;
         $.ajax({
             type: "GET",
             url: '/Profil?handler=Kabina',
@@ -148,26 +190,32 @@
                 xhr.setRequestHeader("XSRF-TOKEN",
                     $('input:hidden[name="__RequestVerificationToken"]').val());
             },
-            data: { oznaka: soba },
+            data: { oznaka: kabina },
             success: function (response) {
-                $("#soba").empty();
+                $("#kabina").empty();
                 if (response.length != 0) {
-                    var body = document.getElementById('soba');
-                    for (var i = 0; i < response.datum.length; i++) {
+                    var body = document.getElementById('kabina');
+                    for (var i = 0; i < response.rezervacije.length; i++) {
                         var red = document.createElement("tr");
                         body.appendChild(red);
                         var celija1 = document.createElement("td");
-                        celija1.innerHTML = response.datum[i];
+                        celija1.innerHTML = response.krstarenja[i].destinacija;
                         red.appendChild(celija1);
                         var celija2 = document.createElement("td");
-                        celija2.innerHTML = response.status[i];
+                        celija2.innerHTML = response.rezervacije[i].ime;
                         red.appendChild(celija2);
                         var celija3 = document.createElement("td");
-                        celija3.innerHTML = response.pocetak[i];
+                        celija3.innerHTML = response.rezervacije[i].prezime;
                         red.appendChild(celija3);
                         var celija4 = document.createElement("td");
-                        celija4.innerHTML = response.kraj[i];
+                        celija4.innerHTML = response.rezervacije[i].email;
                         red.appendChild(celija4);
+                        var celija5 = document.createElement("td");
+                        celija5.innerHTML = response.rezervacije[i].brojpasosa;
+                        red.appendChild(celija5);
+                        var celija6 = document.createElement("td");
+                        celija6.innerHTML = response.rezervacije[i].status;
+                        red.appendChild(celija6);
                     }
                 }
             }

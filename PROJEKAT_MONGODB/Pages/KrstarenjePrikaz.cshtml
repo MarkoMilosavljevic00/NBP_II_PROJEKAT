@@ -65,9 +65,9 @@
                                 <p>
                                     @foreach (var luka in Model.luke)
                                     {
-                                        string lukeStr = luka.Naziv + ", " + luka.Mesto;
+                                        string lukeStr = luka.Naziv + " - " + luka.Mesto;
                                         if (Model.luke.Last() != luka)
-                                            lukeStr += " -";
+                                            lukeStr += ", ";
                                         <span>@lukeStr</span>
                                     }
                                 </p>
@@ -172,7 +172,7 @@
                 display: flex;
                 justify-content: right;
                 ">
-                <button class="btn-theme1" style="height: 75px;width: 200px;"><a asp-page="/Rezervacija" asp-route-krstarenjeId="@Model.krstarenje.Id" asp-route-kruzerId="@Model.kruzer.Id">Rezervisi</a></button>
+                <a asp-page="/Rezervacija" asp-route-krstarenjeId="@Model.krstarenje.Id" asp-route-kruzerId="@Model.kruzer.Id"><button class="btn-theme1" style="height: 75px;width: 200px;">Rezervisi</button></a>
             </div>
         </div>
     </div>

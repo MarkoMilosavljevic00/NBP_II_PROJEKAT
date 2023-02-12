@@ -3,81 +3,8 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
-<section class="w3l-main-slider" id="home">
-    <!-- main-slider -->
-    <div class="companies20-content">
-        <div class="companies-wrapper"></div>
-        <div class="owl-one owl-carousel owl-theme">
-            <div class="item">
-                <li>
-                    <div class="slider-info banner-view bg bg2" data-selector=".bg.bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h6>Australia</h6>
-
-
-
-                                    <a class="btn btn-secondary btn-theme2 mt-5" href="/Destinacije"> BookYour Room Now!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </div>
-            <div class="item">
-                <li>
-                    <div class="slider-info  banner-view banner-top1 bg bg2" data-selector=".bg.bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h6>Montenegro</h6>
-
-                                    <a class="btn btn-secondary btn-theme2 mt-5" href="/Destinacije"> BookYour Room Now!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </div>
-            <div class="item">
-                <li>
-                    <div class="slider-info banner-view banner-top2 bg bg2" data-selector=".bg.bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h6>Thaiwan</h6>
-
-                                    <a class="btn btn-secondary btn-theme2 mt-5" href="/Destinacije"> BookYour Room Now!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </div>
-            <div class="item">
-                <li>
-                    <div class="slider-info banner-view banner-top3 bg bg2" data-selector=".bg.bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h6>Malta</h6>
-                                    s
-                                    <a class="btn btn-secondary btn-theme2 mt-5" href="/Destinacije"> BookYour Room Now!</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </div>
-        </div>
-    </div>
-    </div>
-
     <script src="js/owl.carousel.js"></script>
 
-    <!-- script for -->
     <script>
         $(document).ready(function () {
             $('.owl-one').owlCarousel({
@@ -110,12 +37,7 @@
             })
         })
     </script>
-    <!-- //script -->
-    <!-- /main-slider -->
 </section>
-<!---728x90--->
-
-
 
 
 <section class="grids-5">
@@ -152,26 +74,17 @@
 
 
 
-                @foreach (var Kruzer in Model.topRated)
+                @foreach (var k in Model.krstarenjaZaPrikaz)
                 {
                     <div class="grids4-info col-md-6" style="width: 100px;">
-                        <a href="Hotel-Single?id=@Kruzer.Id"><img src="@Kruzer.Slike[0]" class="img-fluid" alt=""></a>
+                        <a href="Katalog"><img src="@k.Slike[0]" class="img-responsive" style="width:450px; height:300px" alt=""></a>
                         <div class="info-bg">
                             <h5>
-                                <a href="KruzerSingle?id=@Kruzer.Id">
-                                    @Kruzer.Naziv
+                                <a href="Katalog">
+                                    @k.Destinacija
                                 </a>
                             </h5>
-                            @foreach (var grad in Kruzer.Gradovi)
-                            {
-                                <h6>@grad.Naziv</h6>
 
-                            }
-
-                            @*<p>@String.Concat(Hotel.Opis.Substring(0,500), "...") </p>*@
-                            @*<p>Hotel </p>*@
-
-                            <a class="btn btn-theme1" href="KruzerSingle?id=@Kruzer.Id"> View Details</a>
                         </div>
                     </div>
                 }
@@ -180,31 +93,3 @@
         </div>
     </div>
 </section>
-
-
-@*<section class="w3l-feature-3">
-    <div class="grid top-bottom py-5">
-        <div class="container py-md-3">
-            <div class="middle-section grid-column text-center">
-                <div class="three-grids-columns">
-                    <span class="fa fa-envelope-o"></span>
-                    <h4>PISITE NAM MEJL</h4>
-                    <p> </p>
-                    <a href="/Kontakt" class="btn btn-secondary btn-theme3 mt-4">Pisite nam mejl </a>
-                </div>
-                <div class="three-grids-columns">
-                    <span class="fa fa-globe"></span>
-                    <h4>LOCATE US</h4>
-                    <p></p>
-                    <a href="/ONama" class="btn btn-secondary btn-theme3 mt-4">View Map </a>
-                </div>
-                <div class="three-grids-columns">
-                    <span class="fa fa-phone"></span>
-                    <h4>POTREBNA VAM JE POMOC?</h4>
-                    <p></p>
-                    <a href="/Kontakt" class="btn btn-secondary btn-theme3 mt-4">Kontaktirajte nas</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>*@

@@ -67,39 +67,35 @@ namespace PROJEKAT_MONGODB.Pages
             if (kruzer == null || krstarenje == null)
                 return RedirectToPage("/Index");
 
-            List<Kabina> rezervisaneKabine = _dbKabine.Find(x => x.Kruzer.Id.AsObjectId.Equals(kruzer.Id) && x.Rezervacije!=null && x.Rezervacije.Count > 0).ToList();
+            List<Kabina> rezervisaneKabine = await _dbKabine.Find(x => x.Kruzer.Id.AsObjectId.Equals(kruzer.Id) && x.Rezervacije!=null && x.Rezervacije.Count > 0).ToListAsync();
             List<Rezervacija> rezervacije = new List<Rezervacija>();
             foreach (var kabina in rezervisaneKabine)
             {
-                rezervacije.Add(_dbRezervacije.Find(x =>
+                Rezervacija r = _dbRezervacije.Find(x =>
                     x.Kabina.Id.AsObjectId.Equals(kabina.Id) &&
                     x.Krstarenje.Id.AsObjectId.Equals(krstarenje.Id) &&
                     x.Kruzer.Id.AsObjectId.Equals(kruzer.Id))
-                    .FirstOrDefault());
+                    .FirstOrDefault();
+                if(r!=null)
+                    rezervacije.Add(r);
             }
-            //dostupneKabine = _dbKabine.Find(kabina =>
-            //                kabina.Kruzer.Id.AsObjectId.Equals(kruzer.Id) &&
-            //                !rezervacije.Any(rezervacija => rezervacija.Kabina.Id.AsObjectId.Equals(kabina.Id)))
-            //            .ToList();
-
-            List<Kabina> sveKabine = _dbKabine.Find(kabina => kabina.Kruzer.Id == kruzer.Id).ToList();
-
-            foreach (Kabina k in sveKabine)
+            List<Kabina> sveKabine = await _dbKabine.Find(kabina => kabina.Kruzer.Id == kruzer.Id).ToListAsync();
+            if(sveKabine.Count == 0)
             {
-                bool ok = true;
-                foreach (Rezervacija rez in rezervacije)
-                {
-                    if (k.Rezervacije.Contains(new MongoDBRef("rezervacije", rez.Id)))
-                    {
-                        ok = false;
-                        break;
-                    }
-                }
-                if (ok == true)
-                    dostupneKabine.Add(k);
+                return Page();
             }
-            dostupneKabineSelect = new SelectList(dostupneKabine.Select(k => k.BrojKabine + "-" + k.BrojMesta), dostupneKabine.Select(k => k.Id.ToString()));
-
+            if(rezervacije.Count == 0)
+            {
+                dostupneKabine = sveKabine;
+                return Page();
+            }
+            foreach(Kabina kabina in sveKabine)
+            {
+                if (!rezervacije.Any(r => kabina.Rezervacije.Contains(new MongoDBRef("rezervacije", r.Id))))
+                {
+                    dostupneKabine.Add(kabina);
+                }
+            }
             return Page();
         }
 
@@ -158,8 +154,8 @@ namespace PROJEKAT_MONGODB.Pages
             novaRezervacija.BrojPasosa = brojPasosa;
             novaRezervacija.Email = email;
             novaRezervacija.DatumKreiranja = DateTime.Now;
-            novaRezervacija.DatumKreiranja = krstarenje.Pocetak;
-            novaRezervacija.DatumKreiranja = krstarenje.Kraj;
+            novaRezervacija.Pocetak = krstarenje.Pocetak;
+            novaRezervacija.Kraj = krstarenje.Kraj;
             novaRezervacija.Kabina = new MongoDBRef("kabine", kabina.Id);
             novaRezervacija.Krstarenje = new MongoDBRef("krstarenja", krstarenje.Id);
             novaRezervacija.Kruzer = new MongoDBRef("kruzeri", kruzer.Id);

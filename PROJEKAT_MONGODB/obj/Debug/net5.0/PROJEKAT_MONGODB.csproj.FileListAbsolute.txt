@@ -1871,7 +1871,6 @@ C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Admin.c
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Error.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Kontakt.cshtml.g.cs
-C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Kruzeri.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\ONama.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Prijava.cshtml.g.cs
 C:\Users\Marko\Desktop\git\PROJEKAT_MONGODB\obj\Debug\net5.0\Razor\Pages\Privacy.cshtml.g.cs
