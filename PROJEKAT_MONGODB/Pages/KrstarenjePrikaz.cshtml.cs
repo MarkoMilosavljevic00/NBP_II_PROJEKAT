@@ -51,10 +51,6 @@ namespace PROJEKAT_MONGODB.Pages
             ObjectId krstarenjeIdObj = new ObjectId(krstarenjeId);
             kruzer = _dbKruzeri.Find(x => x.Id.Equals(kruzerIdObj)).FirstOrDefault();
             krstarenje = _dbKrstarenja.Find(x => x.Id.Equals(krstarenjeIdObj)).FirstOrDefault();
-            //foreach (MongoDBRef pon in kruzer.Krstarenja.ToList())
-            //{
-            //    krstarenja.Add(_dbKrstarenja.Find(x => x.Id.Equals(new ObjectId(pon.Id.ToString()))).FirstOrDefault());
-            //}
             foreach (MongoDBRef kabinaRef in kruzer.Kabine.ToList())
             {
                 kabine.Add(_dbKabine.Find(x => x.Id.Equals(kabinaRef.Id.AsObjectId)).FirstOrDefault());

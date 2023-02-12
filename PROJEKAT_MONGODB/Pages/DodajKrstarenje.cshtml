@@ -10,20 +10,6 @@
 <form action="" method="post" id="signupForm" style="width: 250px;">
     <br><br><div style="width:100%;display: flex;flex-direction:row;justify-content:space-between;">
         <h3>Unos informacija o krstarenju za kruzer @Model.kruzer.Naziv: </h3>
-        @*<h3>Prolazi kroz sledece gradove:</h3>
-            @foreach (var grad in Model.kruzer.Gradovi)
-            {
-
-                <h3>
-                    @grad.Naziv
-                </h3>
-            }
-            <h3>Prolazi kroz sledece drzave:</h3>
-            @foreach (var drzava in Model.kruzer.Drzave)
-            {
-                <h3>@drzava.Naziv</h3>
-            }
-            <br><br>*@
 
     </div><br><br>
     <input type="hidden" asp-for=@Model.kruzerID>

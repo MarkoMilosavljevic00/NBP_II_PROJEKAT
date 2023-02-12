@@ -41,7 +41,6 @@ namespace PROJEKAT_MONGODB.Pages
             collection.InsertOne(NoviKorisnik);
             HttpContext.Session.SetString("Email", NoviKorisnik.Email);
             return RedirectToPage("/DodajKruzer");
-            //return new JsonResult(NoviKorisnik);
         }
     }
 }

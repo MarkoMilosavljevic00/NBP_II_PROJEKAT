@@ -72,12 +72,6 @@
                 <div id="Kruzeri" class="tabcontent">
                     <form method="post" class="rez-tabela">
                         <h4 class="predstojece-rez">Kruzeri koji imaju rezervacije</h4>
-                        @*@if (Model.kruzeri.Count == 0)
-                            {
-                                <label class="nema-rez">Ne postoje kruzeri!</label>
-                            }
-                            else
-                            {*@
                         <div style="overflow-y:scroll; height:500px;">
                             <table id="offers1" class="table" style="width:95%;">
                                 <thead>
@@ -97,7 +91,7 @@
                                         <tr>
                                             <td><img src="@Model.kruzeri.ElementAt(i).Slike[0]" style="width:150px; height:90px;"></td>
                                             <td>@Model.kruzeri.ElementAt(i).Naziv</td>
-                                            <td>@Model.kruzeriRezervacija.ElementAt(i).BrojTelefona</td>
+                                            <td>@Model.kruzeri.ElementAt(i).BrojTelefona</td>
 
                                             <td>@Model.menadzeri.ElementAt(i).Ime @Model.menadzeri.ElementAt(i).Prezime</td>
                                             <td>@Model.menadzeri.ElementAt(i).Email</td>

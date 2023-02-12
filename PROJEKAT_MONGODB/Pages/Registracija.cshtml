@@ -6,12 +6,6 @@
     <div class="login-bg section-gap">
         <div class="container">
             <!---728x90--->
-            <!--<div class="logo text-left top-bottom-gap">-->
-            <!-- if logo is image enable this
-            <a class="brand-logo" href="#index.html">
-              <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
-            </a> -->
-            <!--</div>-->
             <div class="login-form">
                 <div class="heading text-center mx-auto">
                     <h3 class="head">Registracija</h3>
@@ -34,32 +28,17 @@
                         <p class="text-head">Prezime: </p>
                         <input type="text" required="" asp-for="NoviKorisnik.Prezime" class="input" placeholder="Unesite prezime..." />
                     </div>
-                    @*<div>
-                        <p class="text-head">Grad: </p>
-                        <input type="text" required="" asp-for="NoviKorisnik.Grad" class="input" placeholder="Unesite grad..." />
-                    </div>
-                    <div>
-                        <p class="text-head">Adresa: </p>
-                        <input type="text" required="" asp-for="NoviKorisnik.Adresa" class="input" placeholder="Unesite adresu..." />
-                    </div>
-                    <div>
-                        <p class="text-head">Broj telefona: </p>
-                        <input type="text" required="" asp-for="NoviKorisnik.BrojTelefona" class="input" placeholder="Unesite broj telefona..." />
-                    </div>*@
                     <div>
                         <p class="text-head">Email adresa: </p>
                         <input type="email" required="" id="email" asp-for="NoviKorisnik.Email" class="input" style="margin-bottom: 0px" placeholder="Unesite email adresu..." />
-                        @*<label class="error error-hidden" style="visibility: hidden;">Email adresa nije validna!</label>*@
                     </div>
                     <div>
                         <p class="text-head" style="margin-top: 0px">Sifra: </p>
                         <input type="password" required="" id="password" asp-for="NoviKorisnik.Sifra" class="input" style="margin-bottom: 0px" placeholder="Unesite sifru..." />
-                        @*<label class="error" style="visibility: hidden;">Ovo polje je obavezno!</label>*@
                     </div>
                     <div>
                         <p class="text-head">Ponovite sifru: </p>
                         <input type="password" required="" id="confirm_password" asp-for="ConfrimPassword" class="input" style="margin-bottom: 0px" placeholder="Ponovo unesite sifru..." />
-                        @*<label class="error" style="visibility: hidden;">Ovo polje je obavezno!</label>*@
                     </div>
 
                     <div class="d-grid align-login-register">

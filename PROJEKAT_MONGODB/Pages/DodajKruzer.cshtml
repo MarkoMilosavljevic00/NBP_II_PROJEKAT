@@ -16,13 +16,11 @@
                               <span class="bi-name v-container wow fadeInLeft">
                                   <div class="form-element-label">Naziv kruzera/kompanije: </div>
                                   <input type="text" id="name-val" required="" value="" asp-for="noviKruzer.Naziv">
-                                  @*<label class="error" style="visibility: hidden;">This field is required.</label>*@
                               </span>
                           </div>
                           <div>
                               <span class="bi-city wow fadeInRight">
                                   <div class="form-element-label">Kapetan: </div>
-                                  @*<input type="text" id="city-val" value="" asp-for="cities">*@
                                   <input type="text" id="captain-val" required="" value="" asp-for="noviKruzer.Kapetan">
                                   <label class="error" style="visibility: hidden;">This field is required.</label>
                               </span>
@@ -75,15 +73,6 @@
                           <label class="error" style="margin-bottom: 0px">@Model.imageError</label>
                           </div>
 
-
-                          @*<div id="bi-map-modal" class="modal">
-            <div class="modal-content">
-                <div class="map-title-x"><br /><h3 class="form-element-label">Set marker on your business's location</h3><span class="bi-map-modal-close">&times;</span></div>
-                <div id="bi-map"></div>
-                <label class="btn button-eff" id="doneWithMap" class="register-but">DONE</label>
-            </div>
-        </div>*@
-
                           <div class="bi-description wow fadeInLeft">
                               <div class="form-element-label">Kabine: </div><br>
                               <span>
@@ -99,9 +88,6 @@
                               <br>
                           </div>
                           <br><br><br>
-
-                          @*<input type="text" id="mapLongitude" value="" asp-for="noviHotel.longitude" style="display: none;">
-        <input type="text" id="mapLatitude" value="" asp-for="noviHotel.latitude" style="display: none;">*@
                           <div class="bi-buttons wow fadeInLeft">
                               <button class="btn btn-theme1" type="submit" asp-page-handler="next" class="register-but" id="bi-finish">Finish</button>
 
@@ -220,21 +206,6 @@
                 if (files.length + currImported < 0) {
                     alertUser("Morate upload-ovati barem 1 sliku!")
                 }
-                //if (files.length - faultyImages + currImported < 5) {
-                //    let pom = 4 - (files.length - faultyImages + currImported);
-                //    if (pom == 1) { alertUser("Upload " + pom + " more picture!"); }
-                //    else { alertUser("Upload " + pom + " more pictures!"); }
-                //}
-                //else if (files.length + currImported > 4) {
-                //    let pom = 4 - currImported;
-                //    if (pom == 1)
-                //        alertUser("Too many pictures imported. Only " + pom + " more allowed!");
-                //    else if (pom == 0)
-                //        alertUser("No more pictures allowed. Remove some if you want to add more");
-                //    else
-                //        alertUser("Too many pictures imported. Only " + pom + " more allowed!");
-                //    return;
-                //}
                 else
                     alertUser("");
                 let niz = new Array()

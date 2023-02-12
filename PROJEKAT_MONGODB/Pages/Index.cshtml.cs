@@ -21,8 +21,6 @@ namespace PROJEKAT_MONGODB.Pages
 
         public IndexModel(IDatabaseSettings settings)
         {
-            //var client = new MongoClient(settings.ConnectionString);
-            //var database = client.GetDatabase(settings.DatabaseName);
             var client = new MongoClient("mongodb://localhost/?safe=true");
             var database = client.GetDatabase("SEVENSEAS");
             _dbKruzeri = database.GetCollection<Kruzer>("kruzeri");
@@ -52,7 +50,6 @@ namespace PROJEKAT_MONGODB.Pages
             HttpContext.Session.Remove("Email");
             Message = null;
             return RedirectToPage("/Index");
-            //<a asp-page="/Index" asp-page-handler="Logout">Logout</a>
         }
     }
 }

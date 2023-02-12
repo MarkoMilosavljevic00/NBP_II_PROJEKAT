@@ -96,10 +96,6 @@ namespace PROJEKAT_MONGODB.Pages
                 novaLuka.Mesto = mesto;
                 noveLuke.Add(novaLuka);
             }
-            //foreach (Luka l in noveLuke)
-            //{
-            //    novoKrstarenje.Luke.Add(new MongoDBRef("luke", );
-            //}
             await _dbLuke.InsertManyAsync(noveLuke);
 
             if (string.IsNullOrEmpty(slike[0]))
@@ -131,7 +127,6 @@ namespace PROJEKAT_MONGODB.Pages
             await _dbKrstarenja.UpdateOneAsync(krstarenje => krstarenje.Id == novoKrstarenje.Id, update1);
             var update = Builders<Kruzer>.Update.Push(Kruzer => Kruzer.Krstarenja, new MongoDBRef("krstarenja", novoKrstarenje.Id));
             await _dbKruzeri.UpdateOneAsync(Kruzer => Kruzer.Id == new ObjectId(kruzerID), update);
-            //return RedirectToPage("/KruzerSingle", new { id = kruzerID });
             return RedirectToPage("/Profil");
         }
 

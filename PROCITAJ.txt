@@ -1,0 +1,9 @@
+Na pocetku ukucamo u mongoshell-u sledece:
+db.korisnici.insertOne({Ime:"Admin",Prezime:"Adminic",Email:"admin@gmail.com",Sifra:"123",BrojTelefona:"064064064",Grad:"Nis",Adresa:"Aleksandra Medvedeva",Tip:1}) 
+To ce nam biti admin.
+Dalje registrujemo dva ili vise korisnika.Kada registrujemo novog korisnika, tip mu je stavljen na 0.(Nije admin,admin je samo Tipa 1)
+Nakon ovoga mozemo isprobati aplikaciju.
+Pozeljno bi bilo da budu otvorena tri prozora(Jedan prozor ce biti google chrome(ili neki drugi),drugi prozor recimo incognito, i treci ce biti microsoft edge
+ili neki drugi browser).
+U prvom ce biti logovan admin, u drugom onaj koji postavlja kruzer i rezervacije i u trecem ce biti logovan onaj koji rezervise.
+Nakon ovoga mozemo isprobati funkcionalnosti.

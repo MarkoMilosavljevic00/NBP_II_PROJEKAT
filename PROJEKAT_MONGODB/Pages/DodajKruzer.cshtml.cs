@@ -30,14 +30,6 @@ namespace PROJEKAT_MONGODB.Pages
             _dbGradovi = database.GetCollection<Luka>("gradovi");
 
         }
-        //[BindProperty]
-        //public string glavnaSlika { get; set; }
-        //[BindProperty]
-        //public string slika1 { get; set; }
-        //[BindProperty]
-        //public string slika2 { get; set; }
-        //[BindProperty]
-        //public string slika3 { get; set; }
         [BindProperty]
         public string[] slike { get; set; }
         [BindProperty]
@@ -46,10 +38,6 @@ namespace PROJEKAT_MONGODB.Pages
         public List<string> kabine { get; set; }
         [BindProperty]
         public string imageError { get; set; }
-        //[BindProperty]
-        //public string cities { get; set; }
-        //[BindProperty]
-        //public string states { get; set; }
 
         public string Message { get; set; }
 
@@ -122,7 +110,6 @@ namespace PROJEKAT_MONGODB.Pages
 
             var filter = Builders<Korisnik>.Filter.Eq(kori => kori.Id, kor.Id);
             var up = Builders<Korisnik>.Update.Set("Kruzer", new MongoDBRef("kruzeri", noviKruzer.Id));
-            //if (_dbGradovi.Find(grad => grad.Naziv==noviKruzer.Grad).FirstOrDefault() == null)
 
             await _dbKorisnici.UpdateOneAsync(filter, up);
             return RedirectToPage("/Index");
